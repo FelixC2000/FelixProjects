@@ -2,107 +2,110 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Felix Guzman - Personal Website</title>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Felix Guzman - Personal Website</title>
 
-    <!-- box icons -->
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <!-- Box Icons -->
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 
-    <!-- custom css -->
-    <link rel="stylesheet" href="styles.css" />
+  <!-- Tailwind CSS -->
+  <link rel="stylesheet" href="styles.css" />
 </head>
 
-<body>
-    <!-- header design -->
-    <header>
-        <img src="https://felixc2000.github.io/FelixProjects/felix.png" alt="Felix Guzman's Profile Picture">
-        <h1>Felix Guzman</h1>
-        <p class="typed"></p>
-    </header>
+<body class="bg-bg-color text-text-color font-poppins scroll-smooth">
 
-    <!-- home section design -->
-    <nav>
-        <ul>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#about">About Me</a></li>
-            <!-- Add more navigation links as needed -->
-        </ul>
-    </nav>
+  <!-- Header -->
+  <header class="text-center p-8 bg-second-bg-color">
+    <img src="https://felixc2000.github.io/FelixProjects/felix.png"
+      alt="Felix Guzman's Profile Picture"
+      class="mx-auto w-24 h-24 rounded-full">
+    <h1 class="text-4xl font-bold mt-4">Felix Guzman</h1>
+    <p class="typed mt-2 text-lg font-light"></p>
+  </header>
 
-    <!-- projects section design -->
-    <section id="projects">
-        <h2>My Projects</h2>
-        <!-- Add links and descriptions to your projects -->
-        <div class="project">
-            <h3>AdviWeather</h3>
-            <p>AdviWeather is a weather app that provides weather information, forecasts, and a 5-day outlook for any
-                location in the world.</p>
-            <a href="https://felixc2000.github.io/FelixProjects/AdviWeather/">Visit AdviWeather</a>
-        </div>
+  <!-- Navigation -->
+  <nav class="bg-main-color text-text-color">
+    <ul class="flex justify-around py-4 text-lg font-semibold">
+      <li><a href="#projects" class="hover:underline">Projects</a></li>
+      <li><a href="#about" class="hover:underline">About Me</a></li>
+    </ul>
+  </nav>
 
-        <div class="project">
-            <h3>RecipeFinder</h3>
-            <p>RecipeFinder is a web app that allows users to search for recipes using ingredients, dishes, or cuisines. It
-                also provides a list of recently viewed recipes.</p>
-            <a href="https://felixc2000.github.io/FelixProjects/RecipeFinder/">Visit RecipeFinder</a>
-        </div>
+  <!-- Projects Section -->
+  <section id="projects" class="py-12 px-6 text-center">
+    <h2 class="text-3xl font-bold mb-8">My Projects</h2>
 
-        <div class="project">
-            <h3>CurrencyFlipper</h3>
-            <p>CurrencyFlipper is a currency converter web app that supports 150+ currencies. It also provides exchange rate
-                forecasts based on historical data.</p>
-            <a href="https://felixc2000.github.io/FelixProjects/CurrencyFlipper/">Visit CurrencyFlipper</a>
-        </div>
+    <div class="space-y-10">
+      <div class="project">
+        <h3 class="text-2xl font-semibold">AdviWeather</h3>
+        <p class="mt-2 mb-4">AdviWeather is a weather app that provides weather information, forecasts, and a 5-day
+          outlook for any location in the world.</p>
+        <a href="https://felixc2000.github.io/FelixProjects/AdviWeather/"
+           class="text-main-color hover:underline font-medium">Visit AdviWeather</a>
+      </div>
 
-        <div class="project">
-            <h3>New Year CountDown</h3>
-            <p>New Year Countdown App is a user-friendly application designed to keep users excited and engaged as they
-                eagerly anticipate the arrival of the New Year. The app features a dynamic countdown timer, festive visual
-                elements, and optional customizable reminders, offering a delightful and interactive experience to help
-                users usher in the upcoming year with joy and anticipation.</p>
-            <a href="https://felixc2000.github.io/FelixProjects/NewYearCountDown">Visit NewYearCountDown</a>
-        </div>
-    </section>
+      <div class="project">
+        <h3 class="text-2xl font-semibold">RecipeFinder</h3>
+        <p class="mt-2 mb-4">RecipeFinder is a web app that allows users to search for recipes using ingredients, dishes,
+          or cuisines. It also provides a list of recently viewed recipes.</p>
+        <a href="https://felixc2000.github.io/FelixProjects/RecipeFinder/"
+           class="text-main-color hover:underline font-medium">Visit RecipeFinder</a>
+      </div>
 
-    <!-- about section design -->
-    <section id="about">
-        <h2>About Me</h2>
-        <p>Welcome to my personal corner of the web! I'm Felix Guzman, a passionate Web Developer with a knack for
-            crafting digital experiences. I am on a journey to explore the vast realms of technology and create
-            innovative solutions that leave a lasting impression.</p>
+      <div class="project">
+        <h3 class="text-2xl font-semibold">CurrencyFlipper</h3>
+        <p class="mt-2 mb-4">CurrencyFlipper is a currency converter web app that supports 150+ currencies. It also
+          provides exchange rate forecasts based on historical data.</p>
+        <a href="https://felixc2000.github.io/FelixProjects/CurrencyFlipper/"
+           class="text-main-color hover:underline font-medium">Visit CurrencyFlipper</a>
+      </div>
 
-        <p>My academic background includes a Bachelor's degree in Software Development from Brigham Young University -
-            Idaho, where I honed my skills in developing applications across diverse domains. During my studies, I
-            delved into the world of web development, creating visually captivating, user-centric websites that adhere
-            to industry standards and best practices. I'm always eager to leverage cutting-edge technologies to elevate
-            my programming skills and efficiency.</p>
+      <div class="project">
+        <h3 class="text-2xl font-semibold">New Year CountDown</h3>
+        <p class="mt-2 mb-4">A user-friendly countdown app for the New Year with festive visuals and optional reminders to
+          celebrate with joy and anticipation.</p>
+        <a href="https://felixc2000.github.io/FelixProjects/NewYearCountDown"
+           class="text-main-color hover:underline font-medium">Visit NewYearCountDown</a>
+      </div>
+    </div>
+  </section>
 
-        <p>As a proud recipient of an Associate Certificate in Web & Computer Programming, I have engineered Single Page
-            Applications (SPAs) using JavaScript and node.js. My approach to projects involves orchestrating seamless
-            teamwork, promoting robust collaboration, and effective communication. I enjoy integrating APIs into
-            websites to enhance functionality and user satisfaction. I'm also adept at utilizing tools like Trello for
-            streamlined project management, both individually and collaboratively.</p>
+  <!-- About Section -->
+  <section id="about" class="py-12 px-6 text-center">
+    <h2 class="text-3xl font-bold mb-8">About Me</h2>
 
-        <p>Beyond my technical skills, I hold a PathwayConnect Certificate from BYU-Pathway Worldwide, emphasizing
-            proficiency in English language, effective online collaboration, and the nurturing of leadership and
-            problem-solving skills.</p>
-    </section>
+    <div class="space-y-6 max-w-4xl mx-auto text-base leading-relaxed">
+      <p>Welcome to my personal corner of the web! I'm Felix Guzman, a passionate Web Developer with a knack for
+        crafting digital experiences. I am on a journey to explore the vast realms of technology and create innovative
+        solutions that leave a lasting impression.</p>
 
-    <!-- footer design -->
-    <footer>
-        <p>&copy; 2024 Felix Guzman. All rights reserved.</p>
-    </footer>
+      <p>My academic background includes a Bachelor's degree in Software Development from Brigham Young University - Idaho,
+        where I honed my skills in developing applications across diverse domains.</p>
 
-    <!-- scroll reveal -->
-    <script src="https://unpkg.com/scrollreveal"></script>
+      <p>I’ve engineered SPAs using JavaScript and Node.js, integrated APIs, and managed projects efficiently using
+        tools like Trello. My approach is focused on teamwork, collaboration, and effective communication.</p>
 
-    <!-- typed js -->
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+      <p>Beyond technical skills, I hold a PathwayConnect Certificate from BYU-Pathway Worldwide, emphasizing effective
+        communication, leadership, and problem-solving.</p>
+    </div>
+  </section>
 
-    <!-- custom js -->
-    <script src="script.js"></script>
+  <!-- Footer -->
+  <footer class="text-center py-4 bg-second-bg-color text-sm text-text-color">
+    <p>&copy; 2024 Felix Guzman. All rights reserved.</p>
+  </footer>
+
+  <!-- Scroll Reveal -->
+  <script src="https://unpkg.com/scrollreveal"></script>
+
+  <!-- Typed.js -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+  <!-- Custom Script -->
+  <script src="script.js"></script>
+
 </body>
 
 </html>
