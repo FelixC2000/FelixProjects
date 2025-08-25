@@ -1,6 +1,6 @@
 $(document).ready(function() {
     var apiEndpoint = "https://api.openweathermap.org/data/2.5/forecast";
-    var apiKey = "YOUR_API_KEY_HERE"; // Move to environment variables in production
+    var apiKey = "5446be76d7c7bdd03fa8dc5f3a9eddb6"; // Move to environment variables in production
 
     $("#searchBtn").click(function() {
         var location = $("#location").val();
