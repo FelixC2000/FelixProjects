@@ -33,7 +33,7 @@ function countdown() {
   let addZeroes = (num) => (num < 10 ? `0${num}` : num);
 
   if (endTime < todayTime) {
-    clearInterval(i);
+    clearInterval(countdownInterval);
     document.querySelector(".countdown").innerHTML = `<h1>Countdown Has Expired</h1>`;
   } else {
     let daysLeft = Math.floor(remainingTime / oneDay);
@@ -51,5 +51,5 @@ function countdown() {
 }
 
 updateHeading(); // Update the heading initially
-let i = setInterval(countdown, 1000);
+let countdownInterval = setInterval(countdown, 1000);
 countdown();

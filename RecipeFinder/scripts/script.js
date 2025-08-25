@@ -1,4 +1,4 @@
-const apiKey = process.env.SPOONACULAR_API_KEY || 'YOUR_API_KEY_HERE'; // Use environment variable
+const apiKey = 'YOUR_API_KEY_HERE'; // Replace with your Spoonacular API key
 const searchInput = document.getElementById('searchInput');
 const searchButton = document.getElementById('searchButton');
 const recipeContainer = document.getElementById('recipeContainer');

@@ -1,4 +1,4 @@
-//create a canvas object fro HTML element
+//create a canvas object for HTML element
 var canvas = document.getElementById('canvas');
 //create a 2d drawing object
 var ctx = canvas.getContext('2d');
@@ -47,14 +47,13 @@ function drawNumbers(ctx, radius) {
     ctx.textBaseline = "middle"; //set text alignment to middle
     ctx.textAlign = "center"; //set text alignment to center
     for(num=1; num < 13; num++){ //calculate the print position for each number
+        ctx.save();
         ang = num *Math.PI /6;
         ctx.rotate(ang);
         ctx.translate(0, -radius*0.85);
         ctx.rotate(-ang);
         ctx.fillText(num.toString(), 0, 0);
-        ctx.rotate(ang);
-        ctx.translate(0, radius*0.85);
-        ctx.rotate(-ang);
+        ctx.restore();
     }
 }
 
@@ -82,6 +81,7 @@ function drawTime(ctx, radius){
 }
 
 function drawHand(ctx, pos, length, width){
+    ctx.save();
     ctx.beginPath();
     ctx.lineWidth = width;
     ctx.lineCap = "round";
@@ -89,5 +89,5 @@ function drawHand(ctx, pos, length, width){
     ctx.rotate(pos);
     ctx.lineTo(0, -length);
     ctx.stroke();
-    ctx.rotate(-pos);
+    ctx.restore();
 }

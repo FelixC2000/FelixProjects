@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const currentDate = new Date();
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     const formattedDate = currentDate.toLocaleDateString('en-US', options);
-    document.querySelector("footer p").innerHTML += ` ${formattedDate}`;
+    document.querySelector("footer p").textContent += ` ${formattedDate}`;
 
     // Scroll reveal animation
     ScrollReveal().reveal('#projects, #about', {

@@ -1,8 +1,16 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Fetch available currencies from the API
     fetch('https://open.er-api.com/v6/latest')
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
         .then(data => {
+            if (!data || !data.rates) {
+                throw new Error('Invalid API response format');
+            }
             const currencies = Object.keys(data.rates);
             
             // Populate the currency dropdowns
@@ -32,8 +40,19 @@ function convertCurrency() {
     const toCurrency = document.getElementById('to').value;
 
     fetch(`https://open.er-api.com/v6/latest?base=${fromCurrency}`)
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
         .then(data => {
+            if (!data || !data.rates) {
+                throw new Error('Invalid API response format');
+            }
+            if (!amount || isNaN(parseFloat(amount))) {
+                throw new Error('Invalid amount entered');
+            }
             const exchangeRate = data.rates[toCurrency];
             const result = (amount * exchangeRate).toFixed(2);
 

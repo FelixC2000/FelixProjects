@@ -1,10 +1,10 @@
 console.log("first");
-    
-    setTimeout(() => {
-      console.log("second");
-    }, 2000);
-    
-    console.log("third");
+
+setTimeout(() => {
+  console.log("second");
+}, 2000);
+
+console.log("third");
 
     // async/await example
     async function fetchData() {
@@ -20,10 +20,16 @@ console.log("first");
       try {
         const data = await fetchData();
         console.log(data);
-        document.querySelector('.output').textContent = data; // Displaying output on the webpage
+        const outputElement = document.querySelector('.output');
+        if (outputElement) {
+          outputElement.textContent = data;
+        }
       } catch (error) {
         console.error('An error occurred:', error);
-        document.querySelector('.output').textContent = 'Error occurred'; // Displaying error message on the webpage
+        const outputElement = document.querySelector('.output');
+        if (outputElement) {
+          outputElement.textContent = 'Error occurred';
+        }
       }
     }
 
