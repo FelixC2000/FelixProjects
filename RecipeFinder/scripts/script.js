@@ -1,4 +1,4 @@
-const apiKey = '76bc81e74645481e8099e336501a31c7'; // Replace with your Spoonacular API key
+const apiKey = process.env.SPOONACULAR_API_KEY || 'YOUR_API_KEY_HERE'; // Use environment variable
 const searchInput = document.getElementById('searchInput');
 const searchButton = document.getElementById('searchButton');
 const recipeContainer = document.getElementById('recipeContainer');
@@ -14,6 +14,9 @@ async function searchRecipe() {
     try {
         // First, get the recipe based on the ingredients
         const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&query=${searchTerm}&addRecipeInformation=true`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
         const data = await response.json();
 
         if (data.results && data.results.length > 0) {
@@ -26,6 +29,9 @@ async function searchRecipe() {
 
             // Fetch and display full recipe information
             const recipeInformationResponse = await fetch(`https://api.spoonacular.com/recipes/${recipe.id}/information?apiKey=${apiKey}`);
+            if (!recipeInformationResponse.ok) {
+                throw new Error(`HTTP error! status: ${recipeInformationResponse.status}`);
+            }
             const recipeInformationData = await recipeInformationResponse.json();
 
             if (recipeInformationData.instructions) {
@@ -37,7 +43,8 @@ async function searchRecipe() {
             }
         } else {
             recipeContainer.style.display = 'none';
-            alert('Recipe not found.');
+            console.log('Recipe not found.');
+            recipeInformation.textContent = 'Recipe not found. Please try a different search term.';
         }
     } catch (error) {
         console.error(error);

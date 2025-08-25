@@ -37,7 +37,7 @@ function convertCurrency() {
             const exchangeRate = data.rates[toCurrency];
             const result = (amount * exchangeRate).toFixed(2);
 
-            document.getElementById('result').innerHTML = `${amount} ${fromCurrency} is equal to ${result} ${toCurrency}`;
+            document.getElementById('result').textContent = `${amount} ${fromCurrency} is equal to ${result} ${toCurrency}`;
         })
         .catch(error => console.error('Error converting currency:', error));
 }

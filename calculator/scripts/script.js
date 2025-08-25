@@ -5,6 +5,11 @@ document.addEventListener("DOMContentLoaded", function() {
   const equalsButton = document.getElementById("equals");
   const clearButton = document.querySelector("[data-value='clear']");
 
+  if (!resultField || !equalsButton || !clearButton) {
+    console.error("Required calculator elements not found");
+    return;
+  }
+
   let currentInput = '';
   let previousInput = '';
   let operator = '';
@@ -39,6 +44,14 @@ document.addEventListener("DOMContentLoaded", function() {
       const previous = parseFloat(previousInput);
       const current = parseFloat(currentInput);
 
+      if (isNaN(previous) || isNaN(current)) {
+          currentInput = 'Error';
+          previousInput = '';
+          operator = '';
+          updateDisplay();
+          return;
+      }
+
       switch (operator) {
           case '+':
               currentInput = previous + current;
@@ -55,6 +68,9 @@ document.addEventListener("DOMContentLoaded", function() {
               } else {
                   currentInput = 'Error';
               }
+              break;
+          default:
+              currentInput = 'Error';
               break;
       }
 

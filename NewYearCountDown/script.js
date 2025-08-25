@@ -3,12 +3,18 @@ let hrBox = document.getElementById("hr-box");
 let minBox = document.getElementById("min-box");
 let secBox = document.getElementById("sec-box");
 
+if (!dayBox || !hrBox || !minBox || !secBox) {
+    console.error("Required countdown elements not found");
+}
+
 // Function to update the heading with the target year
 function updateHeading() {
   let currentYear = new Date().getFullYear();
   let nextYear = currentYear + 1;
   let heading = document.querySelector(".heading h1");
-  heading.textContent = nextYear;
+  if (heading) {
+    heading.textContent = nextYear;
+  }
 }
 
 function countdown() {
@@ -35,10 +41,12 @@ function countdown() {
     let minsLeft = Math.floor((remainingTime % oneHr) / oneMin);
     let secsLeft = Math.floor((remainingTime % oneMin) / 1000);
 
-    dayBox.textContent = addZeroes(daysLeft);
-    hrBox.textContent = addZeroes(hrsLeft);
-    minBox.textContent = addZeroes(minsLeft);
-    secBox.textContent = addZeroes(secsLeft);
+    if (dayBox && hrBox && minBox && secBox) {
+      dayBox.textContent = addZeroes(daysLeft);
+      hrBox.textContent = addZeroes(hrsLeft);
+      minBox.textContent = addZeroes(minsLeft);
+      secBox.textContent = addZeroes(secsLeft);
+    }
   }
 }
 

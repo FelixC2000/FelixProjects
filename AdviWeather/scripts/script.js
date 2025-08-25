@@ -1,15 +1,19 @@
 $(document).ready(function() {
     var apiEndpoint = "https://api.openweathermap.org/data/2.5/forecast";
-    var apiKey = "56695f14f0aa586a632190a228b54d7d";
+    var apiKey = process.env.OPENWEATHER_API_KEY || "YOUR_API_KEY_HERE";
 
     $("#searchBtn").click(function() {
         var location = $("#location").val();
-        var queryUrl = apiEndpoint + "?q=" + location + "&cnt=5&units=metric&appid=" + apiKey;
+        if (!location || location.trim() === "") {
+            alert("Please enter a location");
+            return;
+        }
+        var queryUrl = apiEndpoint + "?q=" + encodeURIComponent(location) + "&cnt=5&units=metric&appid=" + apiKey;
         $.ajax({
             url: queryUrl,
             method: "GET",
             success: function(response) {
-                console.log(response);
+                console.log("Weather API response received");
                 var forecastHtml = "";
                 for (var i = 0; i < response.list.length; i++) {
                     var date = new Date(response.list[i].dt * 1000);
@@ -20,18 +24,19 @@ $(document).ready(function() {
                     var minTemp = response.list[i].main.temp_min.toFixed(1);
                     var maxTemp = response.list[i].main.temp_max.toFixed(1);
                     var description = response.list[i].weather[0].description;
-                    forecastHtml += "<div class='day'>" +
-            "<div class='date'>" + dayOfWeek + "</div>" +
-            "<div class='weather-icon'><img src='" + weatherIconUrl + "'></div>" +
-            "<div class='temp'>" + maxTemp + "°C / " + minTemp + "°C</div>" +
-            "<div class='description'>" + description + "</div>" +
-        "</div>";
+                    var dayDiv = $("<div class='day'></div>");
+                    dayDiv.append($("<div class='date'></div>").text(dayOfWeek));
+                    dayDiv.append($("<div class='weather-icon'><img src='" + weatherIconUrl + "'></div>"));
+                    dayDiv.append($("<div class='temp'></div>").text(maxTemp + "°C / " + minTemp + "°C"));
+                    dayDiv.append($("<div class='description'></div>").text(description));
+                    forecastHtml += dayDiv[0].outerHTML;
 
                 }
                 $("#forecast").html(forecastHtml);
             },
             error: function() {
-                alert("Error fetching forecast");
+                console.log("Error fetching forecast");
+                $("#forecast").html("<p>Error fetching forecast. Please try again.</p>");
             }
         });
     });

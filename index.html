@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Felix Guzman - Personal Website</title>
+    <title>Felix Guzman - Resume</title>
 
     <!-- box icons -->
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
@@ -16,79 +16,146 @@
 
 <body>
     <!-- header design -->
-    <header>
-        <img src="https://felixc2000.github.io/FelixProjects/felix.png" alt="Felix Guzman's Profile Picture">
-        <h1>Felix Guzman</h1>
-        <p class="typed"></p>
+    <header class="resume-header">
+        <div class="profile-section">
+            <img src="https://felixc2000.github.io/FelixProjects/felix.png" alt="Felix Guzman's Profile Picture" class="profile-image">
+            <div class="header-info">
+                <h1>Felix Guzman</h1>
+                <h2 class="job-title">Web Developer</h2>
+                <div class="contact-info">
+                    <p><i class='bx bx-envelope'></i> fguzmanceri@gmail.com</p>
+                    <p><i class='bx bx-phone'></i> +1 809 307 8324</p>
+                    <p><i class='bx bx-map'></i> Los Cantines, Hatillo, San Cristóbal, DR</p>
+                    <p><i class='bx bxl-linkedin'></i> <a href="https://www.linkedin.com/in/felix-samuel-guzman-065298211/" target="_blank">LinkedIn Profile</a></p>
+                    <p><i class='bx bxl-github'></i> github.com/felixc2000</p>
+                </div>
+            </div>
+        </div>
     </header>
 
-    <!-- home section design -->
-    <nav>
+    <!-- navigation -->
+    <nav class="resume-nav">
         <ul>
+            <li><a href="#summary">Summary</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
             <li><a href="#projects">Projects</a></li>
-            <li><a href="#about">About Me</a></li>
-            <!-- Add more navigation links as needed -->
+            <li><a href="#education">Education</a></li>
+            <li><a href="#certifications">Certifications</a></li>
         </ul>
     </nav>
 
-    <!-- projects section design -->
-    <section id="projects">
-        <h2>My Projects</h2>
-        <!-- Add links and descriptions to your projects -->
-        <div class="project">
-            <h3>AdviWeather</h3>
-            <p>AdviWeather is a weather app that provides weather information, forecasts, and a 5-day outlook for any
-                location in the world.</p>
-            <a href="https://felixc2000.github.io/FelixProjects/AdviWeather/">Visit AdviWeather</a>
-        </div>
+    <!-- professional summary -->
+    <section id="summary" class="resume-section">
+        <h2><i class='bx bx-user'></i> Professional Summary</h2>
+        <p>Passionate Web Developer with a Bachelor's degree in Software Development from Brigham Young University - Idaho. Experienced in creating user-centric websites, Single Page Applications, and API integrations. Proven track record in collaborative development and project management with strong problem-solving skills.</p>
+    </section>
 
-        <div class="project">
-            <h3>RecipeFinder</h3>
-            <p>RecipeFinder is a web app that allows users to search for recipes using ingredients, dishes, or cuisines. It
-                also provides a list of recently viewed recipes.</p>
-            <a href="https://felixc2000.github.io/FelixProjects/RecipeFinder/">Visit RecipeFinder</a>
-        </div>
-
-        <div class="project">
-            <h3>CurrencyFlipper</h3>
-            <p>CurrencyFlipper is a currency converter web app that supports 150+ currencies. It also provides exchange rate
-                forecasts based on historical data.</p>
-            <a href="https://felixc2000.github.io/FelixProjects/CurrencyFlipper/">Visit CurrencyFlipper</a>
-        </div>
-
-        <div class="project">
-            <h3>New Year CountDown</h3>
-            <p>New Year Countdown App is a user-friendly application designed to keep users excited and engaged as they
-                eagerly anticipate the arrival of the New Year. The app features a dynamic countdown timer, festive visual
-                elements, and optional customizable reminders, offering a delightful and interactive experience to help
-                users usher in the upcoming year with joy and anticipation.</p>
-            <a href="https://felixc2000.github.io/FelixProjects/NewYearCountDown">Visit NewYearCountDown</a>
+    <!-- skills section -->
+    <section id="skills" class="resume-section">
+        <h2><i class='bx bx-code-alt'></i> Technical Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h3>Frontend</h3>
+                <ul>
+                    <li>JavaScript</li>
+                    <li>HTML5 & CSS3</li>
+                    <li>Responsive Design</li>
+                    <li>API Integration</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3>Backend</h3>
+                <ul>
+                    <li>Node.js</li>
+                    <li>Single Page Applications</li>
+                    <li>Web Development</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3>Tools & Methods</h3>
+                <ul>
+                    <li>Git & Version Control</li>
+                    <li>Trello Project Management</li>
+                    <li>Collaborative Development</li>
+                    <li>Problem Solving</li>
+                </ul>
+            </div>
         </div>
     </section>
 
-    <!-- about section design -->
-    <section id="about">
-        <h2>About Me</h2>
-        <p>Welcome to my personal corner of the web! I'm Felix Guzman, a passionate Web Developer with a knack for
-            crafting digital experiences. I am on a journey to explore the vast realms of technology and create
-            innovative solutions that leave a lasting impression.</p>
-
-        <p>My academic background includes a Bachelor's degree in Software Development from Brigham Young University -
-            Idaho, where I honed my skills in developing applications across diverse domains. During my studies, I
-            delved into the world of web development, creating visually captivating, user-centric websites that adhere
-            to industry standards and best practices. I'm always eager to leverage cutting-edge technologies to elevate
-            my programming skills and efficiency.</p>
-
-        <p>As a proud recipient of an Associate Certificate in Web & Computer Programming, I have engineered Single Page
-            Applications (SPAs) using JavaScript and node.js. My approach to projects involves orchestrating seamless
-            teamwork, promoting robust collaboration, and effective communication. I enjoy integrating APIs into
-            websites to enhance functionality and user satisfaction. I'm also adept at utilizing tools like Trello for
-            streamlined project management, both individually and collaboratively.</p>
-
-        <p>Beyond my technical skills, I hold a PathwayConnect Certificate from BYU-Pathway Worldwide, emphasizing
-            proficiency in English language, effective online collaboration, and the nurturing of leadership and
-            problem-solving skills.</p>
+    <!-- experience section -->
+    <section id="experience" class="resume-section">
+        <h2><i class='bx bx-briefcase'></i> Experience</h2>
+        <div class="experience-item">
+            <h3>Web Developer</h3>
+            <p class="company">Freelance Projects</p>
+            <p class="date">2023 - Present</p>
+            <ul>
+                <li>Developed multiple web applications including weather forecasting, recipe finder, and currency converter tools</li>
+                <li>Implemented responsive design principles ensuring cross-device compatibility</li>
+                <li>Integrated third-party APIs to enhance application functionality and user experience</li>
+                <li>Created user-friendly interfaces with modern JavaScript frameworks and libraries</li>
+            </ul>
+        </div>
     </section>
+
+    <!-- projects section -->
+    <section id="projects" class="resume-section">
+        <h2><i class='bx bx-folder-open'></i> Featured Projects</h2>
+        
+        <div class="project-item">
+            <h3>AdviWeather <a href="https://felixc2000.github.io/FelixProjects/AdviWeather/" class="project-link"><i class='bx bx-link-external'></i></a></h3>
+            <p class="project-tech">JavaScript, HTML5, CSS3, Weather API</p>
+            <p>Weather application providing real-time weather information, forecasts, and 5-day outlook for global locations. Features responsive design and intuitive user interface.</p>
+        </div>
+
+        <div class="project-item">
+            <h3>RecipeFinder <a href="https://felixc2000.github.io/FelixProjects/RecipeFinder/" class="project-link"><i class='bx bx-link-external'></i></a></h3>
+            <p class="project-tech">JavaScript, Recipe API, Local Storage</p>
+            <p>Recipe search application enabling users to find recipes by ingredients, dishes, or cuisines. Includes recently viewed recipes functionality and ingredient-based filtering.</p>
+        </div>
+
+        <div class="project-item">
+            <h3>CurrencyFlipper <a href="https://felixc2000.github.io/FelixProjects/CurrencyFlipper/" class="project-link"><i class='bx bx-link-external'></i></a></h3>
+            <p class="project-tech">JavaScript, Exchange Rate API, Data Visualization</p>
+            <p>Currency converter supporting 150+ currencies with real-time exchange rates and historical data forecasting capabilities.</p>
+        </div>
+
+        <div class="project-item">
+            <h3>New Year Countdown <a href="https://felixc2000.github.io/FelixProjects/NewYearCountDown" class="project-link"><i class='bx bx-link-external'></i></a></h3>
+            <p class="project-tech">JavaScript, CSS Animations, Date/Time APIs</p>
+            <p>Interactive countdown application with dynamic timer, festive visual elements, and customizable reminders for New Year celebrations.</p>
+        </div>
+    </section>
+
+    <!-- education section -->
+    <section id="education" class="resume-section">
+        <h2><i class='bx bx-graduation'></i> Education</h2>
+        <div class="education-item">
+            <h3>Bachelor's Degree in Software Development</h3>
+            <p class="school">Brigham Young University - Idaho</p>
+            <p class="date">Graduated 2024</p>
+            <p>Specialized in web development, application development across diverse domains, and industry-standard best practices.</p>
+        </div>
+        <div class="education-item">
+            <h3>Associate Certificate in Web & Computer Programming</h3>
+            <p class="school">Brigham Young University - Idaho</p>
+            <p>Focus on Single Page Applications, JavaScript, and Node.js development.</p>
+        </div>
+    </section>
+
+    <!-- certifications section -->
+    <section id="certifications" class="resume-section">
+        <h2><i class='bx bx-award'></i> Certifications</h2>
+        <div class="certification-item">
+            <h3>PathwayConnect Certificate</h3>
+            <p class="issuer">BYU-Pathway Worldwide</p>
+            <p>Proficiency in English language, online collaboration, leadership, and problem-solving skills.</p>
+        </div>
+    </section>
+
+
 
     <!-- footer design -->
     <footer>
