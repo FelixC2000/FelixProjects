@@ -5,6 +5,7 @@ let secBox = document.getElementById("sec-box");
 
 if (!dayBox || !hrBox || !minBox || !secBox) {
     console.error("Required countdown elements not found");
+    return;
 }
 
 // Function to update the heading with the target year
@@ -34,7 +35,10 @@ function countdown() {
 
   if (endTime < todayTime) {
     clearInterval(countdownInterval);
-    document.querySelector(".countdown").innerHTML = `<h1>Countdown Has Expired</h1>`;
+    const countdownElement = document.querySelector(".countdown");
+    if (countdownElement) {
+      countdownElement.innerHTML = `<h1>Countdown Has Expired</h1>`;
+    }
   } else {
     let daysLeft = Math.floor(remainingTime / oneDay);
     let hrsLeft = Math.floor((remainingTime % oneDay) / oneHr);

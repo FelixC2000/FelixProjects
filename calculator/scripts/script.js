@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const equalsButton = document.getElementById("equals");
   const clearButton = document.querySelector("[data-value='clear']");
 
-  if (!resultField || !equalsButton || !clearButton) {
+  if (!resultField || !equalsButton || !clearButton || numberButtons.length === 0 || operatorButtons.length === 0) {
     console.error("Required calculator elements not found");
     return;
   }
@@ -27,8 +27,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
   function handleNumberButtonClick(event) {
       const number = event.target.dataset.value;
-      currentInput += number;
-      updateDisplay();
+      if (number !== undefined) {
+          currentInput += number;
+          updateDisplay();
+      }
   }
 
   function handleOperatorButtonClick(event) {

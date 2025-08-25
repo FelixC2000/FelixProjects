@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 toCurrencySelect.add(option);
             });
         })
-        .catch(error => console.error('Error fetching currencies:', error));
+        .catch(error => console.error('Error fetching currencies'));
 });
 
 function convertCurrency() {
@@ -54,9 +54,12 @@ function convertCurrency() {
                 throw new Error('Invalid amount entered');
             }
             const exchangeRate = data.rates[toCurrency];
+            if (!exchangeRate || isNaN(exchangeRate)) {
+                throw new Error('Exchange rate not available for selected currency');
+            }
             const result = (amount * exchangeRate).toFixed(2);
 
             document.getElementById('result').textContent = `${amount} ${fromCurrency} is equal to ${result} ${toCurrency}`;
         })
-        .catch(error => console.error('Error converting currency:', error));
+        .catch(error => console.error('Error converting currency'));
 }

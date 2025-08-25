@@ -17,16 +17,15 @@ console.log("third");
     }
 
     async function main() {
+      const outputElement = document.querySelector('.output');
       try {
         const data = await fetchData();
         console.log(data);
-        const outputElement = document.querySelector('.output');
         if (outputElement) {
           outputElement.textContent = data;
         }
       } catch (error) {
         console.error('An error occurred:', error);
-        const outputElement = document.querySelector('.output');
         if (outputElement) {
           outputElement.textContent = 'Error occurred';
         }

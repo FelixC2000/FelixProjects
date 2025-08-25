@@ -14,11 +14,17 @@ $(document).ready(function() {
             method: "GET",
             success: function(response) {
                 console.log("Weather API response received");
+                if (!response || !response.list || !Array.isArray(response.list)) {
+                    $("#forecast").html("<p>Invalid weather data received.</p>");
+                    return;
+                }
                 var forecastHtml = "";
                 for (var i = 0; i < response.list.length; i++) {
+                    if (!response.list[i] || !response.list[i].weather || !response.list[i].weather[0]) {
+                        continue;
+                    }
                     var date = new Date(response.list[i].dt * 1000);
-                    var dayOfWeek = date.toLocaleDateString("en-US", { weekday: 'long' });
-                  var dayOfWeek = date.toLocaleDateString("en-US", { weekday: 'long', day: 'numeric' });
+                    var dayOfWeek = date.toLocaleDateString("en-US", { weekday: 'long', day: 'numeric' });
 
                     var weatherIconUrl = "https://openweathermap.org/img/w/" + response.list[i].weather[0].icon + ".png";
                     var minTemp = response.list[i].main.temp_min.toFixed(1);

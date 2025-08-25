@@ -1,5 +1,9 @@
 //create a canvas object for HTML element
 var canvas = document.getElementById('canvas');
+if (!canvas) {
+    console.error('Canvas element not found');
+    return;
+}
 //create a 2d drawing object
 var ctx = canvas.getContext('2d');
 //calculate the clock radius by using the height
@@ -52,7 +56,7 @@ function drawNumbers(ctx, radius) {
         ctx.rotate(ang);
         ctx.translate(0, -radius*0.85);
         ctx.rotate(-ang);
-        ctx.fillText(num.toString(), 0, 0);
+        ctx.fillText(num, 0, 0);
         ctx.restore();
     }
 }
@@ -85,6 +89,7 @@ function drawHand(ctx, pos, length, width){
     ctx.beginPath();
     ctx.lineWidth = width;
     ctx.lineCap = "round";
+    ctx.strokeStyle = "#333";
     ctx.moveTo(0,0);
     ctx.rotate(pos);
     ctx.lineTo(0, -length);

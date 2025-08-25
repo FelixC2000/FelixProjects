@@ -9,7 +9,12 @@ const recipeInformation = document.getElementById('recipeInformation'); // Added
 searchButton.addEventListener('click', searchRecipe);
 
 async function searchRecipe() {
-    const searchTerm = searchInput.value;
+    const searchTerm = searchInput.value.trim();
+    
+    if (!searchTerm) {
+        recipeInformation.textContent = "Please enter a search term.";
+        return;
+    }
 
     try {
         // First, get the recipe based on the ingredients
