@@ -1,187 +1,242 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Felix Guzman - Resume</title>
-
-    <!-- box icons -->
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-
-    <!-- custom css -->
-    <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Felix Guzman - Freelance Software Developer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
-
 <body>
-    <!-- header design -->
-    <header class="resume-header">
-        <div class="profile-section">
-            <img src="https://felixc2000.github.io/FelixProjects/felix.png" alt="Felix Guzman's Profile Picture" class="profile-image">
-            <div class="header-info">
-                <h1>Felix Guzman</h1>
-                <h2 class="job-title">Web Developer</h2>
-                <div class="contact-info">
-                    <p><i class='bx bx-envelope'></i> fguzmanceri@gmail.com</p>
-                    <p><i class='bx bx-phone'></i> +1 809 307 8324</p>
-                    <p><i class='bx bx-map'></i> Los Cantines, Hatillo, San Cristóbal, DR</p>
-                    <p><i class='bx bxl-linkedin'></i> <a href="https://www.linkedin.com/in/felix-samuel-guzman-065298211/" target="_blank">LinkedIn Profile</a></p>
-                    <p><i class='bx bxl-github'></i> github.com/felixc2000</p>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">Felix Guzman</div>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Felix Guzman</h1>
+            <h2>Software Developer | Backend-Focused with Node.js, SQL & MongoDB</h2>
+            <p>Aspiring Full-Stack Engineer specializing in API & Database Integration</p>
+            <div class="hero-buttons">
+                <a href="#services" class="btn-primary">View Services</a>
+                <a href="#contact" class="btn-secondary">Hire Me</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>I am a passionate and driven software development student currently pursuing a Bachelor's in Software Development at Brigham Young University – Idaho, with graduation expected in April 2026.</p>
+                    
+                    <p>I have completed an Associate Certificate in Web and Computer Programming, which has equipped me with practical skills in JavaScript, Node.js, HTML/CSS, and building Single Page Applications (SPAs).</p>
+
+                    <div class="contact-info">
+                        <p><i class="fas fa-phone"></i> +1 809-307-8324</p>
+                        <p><i class="fas fa-envelope"></i> fguzmanceri@gmail.com</p>
+                        <p><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/felix-samuel-guzman-065298211" target="_blank">LinkedIn Profile</a></p>
+                    </div>
+                </div>
+                
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>Backend Development</h3>
+                        <ul>
+                            <li>Node.js & Express.js</li>
+                            <li>MongoDB & Mongoose</li>
+                            <li>RESTful APIs</li>
+                            <li>SQL & PostgreSQL</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Frontend Development</h3>
+                        <ul>
+                            <li>JavaScript & HTML/CSS</li>
+                            <li>React.js</li>
+                            <li>Responsive Design</li>
+                            <li>Single Page Applications</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Tools & Technologies</h3>
+                        <ul>
+                            <li>Git & GitHub</li>
+                            <li>Google Cloud SQL</li>
+                            <li>Trello Project Management</li>
+                            <li>API Integration</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-    </header>
-
-    <!-- navigation -->
-    <nav class="resume-nav">
-        <ul>
-            <li><a href="#summary">Summary</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#education">Education</a></li>
-            <li><a href="#certifications">Certifications</a></li>
-        </ul>
-    </nav>
-
-    <!-- professional summary -->
-    <section id="summary" class="resume-section">
-        <h2><i class='bx bx-user'></i> Professional Summary</h2>
-        <p>Passionate Web Developer with a Bachelor's degree in Software Development from Brigham Young University - Idaho. Experienced in creating user-centric websites, Single Page Applications, and API integrations. Proven track record in collaborative development and project management with strong problem-solving skills.</p>
     </section>
 
-    <!-- skills section -->
-    <section id="skills" class="resume-section">
-        <h2><i class='bx bx-code-alt'></i> Technical Skills</h2>
-        <div class="skills-grid">
-            <div class="skill-category">
-                <h3>Frontend</h3>
-                <ul>
-                    <li>JavaScript</li>
-                    <li>HTML5 & CSS3</li>
-                    <li>Responsive Design</li>
-                    <li>API Integration</li>
-                </ul>
-            </div>
-            <div class="skill-category">
-                <h3>Backend</h3>
-                <ul>
-                    <li>Node.js</li>
-                    <li>Single Page Applications</li>
-                    <li>Web Development</li>
-                </ul>
-            </div>
-            <div class="skill-category">
-                <h3>Tools & Methods</h3>
-                <ul>
-                    <li>Git & Version Control</li>
-                    <li>Trello Project Management</li>
-                    <li>Collaborative Development</li>
-                    <li>Problem Solving</li>
-                </ul>
+    <section id="services" class="services">
+        <div class="container">
+            <h2>My Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-server"></i>
+                    <h3>Backend Development</h3>
+                    <p>RESTful APIs, database design, server-side logic with Node.js, Express, and MongoDB</p>
+                    <div class="price">Starting at $50/hour</div>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-database"></i>
+                    <h3>Database Solutions</h3>
+                    <p>SQL database design, optimization, data migration, and cloud database management</p>
+                    <div class="price">Starting at $45/hour</div>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-code"></i>
+                    <h3>Full-Stack Web Apps</h3>
+                    <p>Complete web applications using MEAN/MERN stack with responsive design</p>
+                    <div class="price">Starting at $60/hour</div>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-plug"></i>
+                    <h3>API Integration</h3>
+                    <p>Third-party API integration, custom API development, and API documentation</p>
+                    <div class="price">Starting at $40/hour</div>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-shopping-cart"></i>
+                    <h3>E-commerce Solutions</h3>
+                    <p>Online stores with payment processing, inventory management, and user authentication</p>
+                    <div class="price">Starting at $70/hour</div>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Data Analysis & Visualization</h3>
+                    <p>Market research, data analysis, and interactive web-based data visualization</p>
+                    <div class="price">Starting at $55/hour</div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- experience section -->
-    <section id="experience" class="resume-section">
-        <h2><i class='bx bx-briefcase'></i> Experience</h2>
-        <div class="experience-item">
-            <h3>Web Developer</h3>
-            <p class="company">Freelance Projects</p>
-            <p class="date">2023 - Present</p>
-            <ul>
-                <li>Developed multiple web applications including weather forecasting, recipe finder, and currency converter tools</li>
-                <li>Implemented responsive design principles ensuring cross-device compatibility</li>
-                <li>Integrated third-party APIs to enhance application functionality and user experience</li>
-                <li>Created user-friendly interfaces with modern JavaScript frameworks and libraries</li>
-            </ul>
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2>Featured Projects</h2>
+            <div class="portfolio-grid">
+                <div class="project-card">
+                    <h3>SneakerStore API</h3>
+                    <p>RESTful API for e-commerce sneaker store with full CRUD operations, user authentication, and order processing</p>
+                    <div class="tech-stack">
+                        <span>Node.js</span>
+                        <span>MongoDB</span>
+                        <span>Express</span>
+                        <span>Mongoose</span>
+                    </div>
+                    <a href="https://github.com/4NDR0S/Final-Project-SneakerStoreAPI-" target="_blank" class="project-link">View Project</a>
+                </div>
+                <div class="project-card">
+                    <h3>Music Industry Analysis</h3>
+                    <p>Interactive website showcasing market analysis of streaming platforms and AI-generated music trends</p>
+                    <div class="tech-stack">
+                        <span>SQL</span>
+                        <span>PostgreSQL</span>
+                        <span>JavaScript</span>
+                        <span>Data Visualization</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>Adventure Store</h3>
+                    <p>React/Node.js/MongoDB e-commerce platform for outdoor gear with Stripe checkout and admin dashboard</p>
+                    <div class="tech-stack">
+                        <span>React</span>
+                        <span>Node.js</span>
+                        <span>MongoDB</span>
+                        <span>Stripe</span>
+                    </div>
+                    <a href="https://github.com/FelixS2000/cse-341-project1" target="_blank" class="project-link">View Project</a>
+                </div>
+                <div class="project-card">
+                    <h3>Chamber of Commerce Website</h3>
+                    <p>Business website for Hatillo Chamber of Commerce providing resources and support to local businesses</p>
+                    <div class="tech-stack">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
+                        <span>Node.js</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- projects section -->
-    <section id="projects" class="resume-section">
-        <h2><i class='bx bx-folder-open'></i> Featured Projects</h2>
-        
-        <div class="project-item">
-            <h3>AdviWeather <a href="https://felixc2000.github.io/FelixProjects/AdviWeather/" class="project-link"><i class='bx bx-link-external'></i></a></h3>
-            <p class="project-tech">JavaScript, HTML5, CSS3, Weather API</p>
-            <p>Weather application providing real-time weather information, forecasts, and 5-day outlook for global locations. Features responsive design and intuitive user interface.</p>
-        </div>
-
-        <div class="project-item">
-            <h3>RecipeFinder <a href="https://felixc2000.github.io/FelixProjects/RecipeFinder/" class="project-link"><i class='bx bx-link-external'></i></a></h3>
-            <p class="project-tech">JavaScript, Recipe API, Local Storage</p>
-            <p>Recipe search application enabling users to find recipes by ingredients, dishes, or cuisines. Includes recently viewed recipes functionality and ingredient-based filtering.</p>
-        </div>
-
-        <div class="project-item">
-            <h3>CurrencyFlipper <a href="https://felixc2000.github.io/FelixProjects/CurrencyFlipper/" class="project-link"><i class='bx bx-link-external'></i></a></h3>
-            <p class="project-tech">JavaScript, Exchange Rate API, Data Visualization</p>
-            <p>Currency converter supporting 150+ currencies with real-time exchange rates and historical data forecasting capabilities.</p>
-        </div>
-
-        <div class="project-item">
-            <h3>New Year Countdown <a href="https://felixc2000.github.io/FelixProjects/NewYearCountDown" class="project-link"><i class='bx bx-link-external'></i></a></h3>
-            <p class="project-tech">JavaScript, CSS Animations, Date/Time APIs</p>
-            <p>Interactive countdown application with dynamic timer, festive visual elements, and customizable reminders for New Year celebrations.</p>
-        </div>
-
-        <div class="project-item">
-            <h3>WDD 230: Assignment Portal <a href="https://felixs2000.github.io/wdd230/" class="project-link"><i class='bx bx-link-external'></i></a></h3>
-            <p class="project-tech">HTML5, CSS3, JavaScript, APIs, Responsive Design</p>
-            <p>Comprehensive web development course portfolio showcasing progressive learning from basic HTML to advanced JavaScript applications.</p>
-        </div>
-
-        <div class="project-item">
-            <h3>Sleep Outside E-commerce <a href="https://sparkly-nougat-fc2117.netlify.app/" class="project-link"><i class='bx bx-link-external'></i></a></h3>
-            <p class="project-tech">JavaScript, Team Collaboration, E-commerce, API Integration</p>
-            <p>Outdoor gear e-commerce platform promoting outdoor lifestyle with mission to get people outside and sleeping under the stars. Features product catalog, shopping cart, and secure checkout.</p>
-        </div>
-    </section>
-
-    <!-- education section -->
-    <section id="education" class="resume-section">
-        <h2><i class='bx bx-graduation'></i> Education</h2>
-        <div class="education-item">
-            <h3>Bachelor's Degree in Software Development</h3>
-            <p class="school">Brigham Young University - Idaho</p>
-            <p class="date">Graduated 2024</p>
-            <p>Specialized in web development, application development across diverse domains, and industry-standard best practices.</p>
-        </div>
-        <div class="education-item">
-            <h3>Associate Certificate in Web & Computer Programming</h3>
-            <p class="school">Brigham Young University - Idaho</p>
-            <p>Focus on Single Page Applications, JavaScript, and Node.js development.</p>
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Let's Work Together</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Get In Touch</h3>
+                    <p>Ready to bring your project to life? Let's discuss your requirements and create something amazing together.</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+1 809-307-8324</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>fguzmanceri@gmail.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-linkedin"></i>
+                            <a href="https://www.linkedin.com/in/felix-samuel-guzman-065298211" target="_blank">LinkedIn Profile</a>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Santo Domingo, Dominican Republic</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <select id="service" name="service" required>
+                            <option value="">Select a Service</option>
+                            <option value="backend">Backend Development</option>
+                            <option value="database">Database Solutions</option>
+                            <option value="fullstack">Full-Stack Web Apps</option>
+                            <option value="api">API Integration</option>
+                            <option value="ecommerce">E-commerce Solutions</option>
+                            <option value="data">Data Analysis & Visualization</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" placeholder="Tell me about your project..." rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">Send Message</button>
+                </form>
+            </div>
         </div>
     </section>
 
-    <!-- certifications section -->
-    <section id="certifications" class="resume-section">
-        <h2><i class='bx bx-award'></i> Certifications</h2>
-        <div class="certification-item">
-            <h3>PathwayConnect Certificate</h3>
-            <p class="issuer">BYU-Pathway Worldwide</p>
-            <p>Proficiency in English language, online collaboration, leadership, and problem-solving skills.</p>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Felix Guzman. All rights reserved.</p>
         </div>
-    </section>
-
-
-
-    <!-- footer design -->
-    <footer>
-        <p>&copy; Felix Guzman. All rights reserved.</p>
     </footer>
 
-    <!-- scroll reveal -->
-    <script src="https://unpkg.com/scrollreveal"></script>
-
-    <!-- typed js -->
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-
-    <!-- custom js -->
     <script src="script.js"></script>
 </body>
-
 </html>
