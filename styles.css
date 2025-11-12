@@ -467,6 +467,20 @@ body {
     line-height: 1.6;
 }
 
+/* Footer Styling (Added to fix the missing footer style) */
+.footer {
+    background: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 2rem;
+    margin-top: 3rem;
+}
+
+.footer .container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .profile-section {
