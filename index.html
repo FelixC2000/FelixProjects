@@ -3,176 +3,200 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Felix Guzman - Freelance Software Developer</title>
+    <title>Felix Guzman - Freelance Developer</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
-<body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">Felix Guzman</div>
-            <ul class="nav-menu">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+<body class="bg-gray-100 text-gray-800">
+    <!-- Header Section -->
+    <header class="resume-header">
+        <div class="profile-section">
+            <img src="https://felixc2000.github.io/FelixProjects/felix.png" alt="Felix Guzman's Profile Picture" class="profile-image">
+            <div class="header-info">
+                <h1>Felix Guzman</h1>
+                <h2 class="job-title">Software Developer | Backend-Focused with Node.js, SQL & MongoDB | Aspiring Full-Stack Engineer | API & Database Integration</h2>
+                <div class="contact-info">
+                    <p><i class='bx bx-envelope'></i> fguzmanceri@gmail.com</p>
+                    <p><i class='bx bx-phone'></i> +1 809-307-8324</p>
+                    <p><i class='bx bx-map'></i> Los Cantines, Hatillo, San Cristóbal, DR</p>
+                    <p><i class='bx bxl-linkedin'></i> <a href="https://www.linkedin.com/in/felix-samuel-guzman-065298211/" target="_blank">LinkedIn Profile</a></p>
+                    <p><i class='bx bxl-github'></i> <a href="https://github.com/felixc2000" target="_blank">github.com/felixc2000</a></p>
+                </div>
+            </div>
         </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="resume-nav">
+        <ul>
+            <li><a href="#summary">Summary</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#certifications">Certifications</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#payment">Payment</a></li>
+        </ul>
     </nav>
 
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Felix Guzman</h1>
-            <h2>Software Developer | Backend-Focused with Node.js, SQL & MongoDB</h2>
-            <p>Aspiring Full-Stack Engineer specializing in API & Database Integration</p>
-            <div class="hero-buttons">
-                <a href="#services" class="btn-primary">View Services</a>
-                <a href="#contact" class="btn-secondary">Hire Me</a>
+    <!-- Professional Summary -->
+    <section id="summary" class="resume-section">
+        <h2><i class='bx bx-user'></i> Professional Summary</h2>
+        <p>I am a passionate and driven software development student currently pursuing a Bachelor's in Software Development at Brigham Young University – Idaho, with graduation expected in April 2026. Alongside my degree, I've completed an Associate Certificate in Web and Computer Programming, which has equipped me with practical skills in JavaScript, Node.js, HTML/CSS, and building Single Page Applications (SPAs). I also have hands-on experience in API development, project management with Trello, and database technologies like Oracle SQL Developer and PostgreSQL.</p><p>Beyond the classroom, I completed a Business Development and Sales Externship at Thematic, where I conducted detailed market research, performed competitive analysis, and created strategic reports for stakeholders. This experience enhanced my ability to work with data and confirmed my passion for applying technical skills to real-world business challenges.</p><p>I'm committed to continuous growth, both as a developer and a teammate. My goal is to contribute to a forward-thinking tech company by applying my strengths in backend development, database management, and API integration to solve complex problems and build meaningful digital solutions.</p>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="resume-section">
+        <h2><i class='bx bx-code-alt'></i> Technical Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h3>Backend</h3>
+                <ul>
+                    <li>Node.js</li>
+                    <li>MongoDB</li>
+                    <li>Express.js</li>
+                    <li>RESTful APIs</li>
+                    <li>Backend Framework Implementation</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3>Databases</h3>
+                <ul>
+                    <li>Oracle SQL Developer</li>
+                    <li>PostgreSQL</li>
+                    <li>SQL on Google Cloud</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3>Frontend</h3>
+                <ul>
+                    <li>JavaScript</li>
+                    <li>HTML5 & CSS3</li>
+                    <li>Responsive Design</li>
+                    <li>Angular/React (MEAN/MEARN Stacks)</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3>General Skills</h3>
+                <ul>
+                    <li>Swift adaptation to emerging technologies</li>
+                    <li>Ethical and efficient utilization of digital tools</li>
+                    <li>Seamless collaboration within team environments</li>
+                    <li>Exceptional customer service across diverse languages</li>
+                </ul>
             </div>
         </div>
     </section>
 
-    <section id="about" class="about">
-        <div class="container">
-            <h2>About Me</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>I am a passionate and driven software development student currently pursuing a Bachelor's in Software Development at Brigham Young University – Idaho, with graduation expected in April 2026.</p>
-                    
-                    <p>I have completed an Associate Certificate in Web and Computer Programming, which has equipped me with practical skills in JavaScript, Node.js, HTML/CSS, and building Single Page Applications (SPAs).</p>
-
-                    <div class="contact-info">
-                        <p><i class="fas fa-phone"></i> +1 809-307-8324</p>
-                        <p><i class="fas fa-envelope"></i> fguzmanceri@gmail.com</p>
-                        <p><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/felix-samuel-guzman-065298211" target="_blank">LinkedIn Profile</a></p>
-                    </div>
-                </div>
-                
-                <div class="skills-grid">
-                    <div class="skill-category">
-                        <h3>Backend Development</h3>
-                        <ul>
-                            <li>Node.js & Express.js</li>
-                            <li>MongoDB & Mongoose</li>
-                            <li>RESTful APIs</li>
-                            <li>SQL & PostgreSQL</li>
-                        </ul>
-                    </div>
-                    <div class="skill-category">
-                        <h3>Frontend Development</h3>
-                        <ul>
-                            <li>JavaScript & HTML/CSS</li>
-                            <li>React.js</li>
-                            <li>Responsive Design</li>
-                            <li>Single Page Applications</li>
-                        </ul>
-                    </div>
-                    <div class="skill-category">
-                        <h3>Tools & Technologies</h3>
-                        <ul>
-                            <li>Git & GitHub</li>
-                            <li>Google Cloud SQL</li>
-                            <li>Trello Project Management</li>
-                            <li>API Integration</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+    <!-- Experience Section -->
+    <section id="experience" class="resume-section">
+        <h2><i class='bx bx-briefcase'></i> Experience</h2>
+        <div class="experience-item">
+            <h3>Business Development and Sales Externship</h3>
+            <p class="company">Thematic</p>
+            <p class="date">August 2023 – December 2023</p>
+            <ul>
+                <li>Conducted in-depth research and evaluation of key information about music artists and music labels.</li>
+                <li>Analyzed market trends and competitive landscape to identify potential business opportunities.</li>
+                <li>Craft and delivered comprehensive summary presentations to stakeholders, highlighting findings and strategic insights.</li>
+                <li>Developed skills in market analysis, data interpretation, and presentation design.</li>
+            </ul>
+        </div>
+        <div class="experience-item">
+            <h3>Branch President</h3>
+            <p class="company">The Church of Jesus Christ of Latter-Day Saints | Hatillo, DOM</p>
+            <p class="date">August 2022 – March 2024</p>
+            <ul>
+                <li>Fostered member growth through cultivation of spiritual and personal ambition.</li>
+                <li>Mentored a diverse cohort of 20+ individuals, facilitating faith, development of inner strength, and profound understanding of gospel teachings.</li>
+            </ul>
+        </div>
+        <div class="experience-item">
+            <h3>Bilingual Customer Service Representative</h3>
+            <p class="company">Data Vimenca | Santo Domingo, DOM</p>
+            <p class="date">August 2022 – December 2022</p>
+            <ul>
+                <li>Formulated targeted and strategic solutions for 30 merchants, resulting in a tangible enhancement of financial stability while preventing a significant number of potential issues.</li>
+                <li>Provided thorough agent training focused on delivering essential procedural insights for 5 to 10 minutes.</li>
+            </ul>
+        </div>
+        <div class="experience-item">
+            <h3>Missionary</h3>
+            <p class="company">The Church of Jesus Christ of Latter-Day Saints| Veracruz, Mexico, MEX</p>
+            <p class="date">September 2018 - September 2020</p>
+            <ul>
+                <li>Analyzed both members and non-members in applying gospel principles to life challenges for 2 years.</li>
+                <li>Facilitated practical application of teachings from the Gospel of Jesus Christ through instructional methods for 18 hours.</li>
+            </ul>
         </div>
     </section>
 
-    <section id="services" class="services">
-        <div class="container">
-            <h2>My Services</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <i class="fas fa-server"></i>
-                    <h3>Backend Development</h3>
-                    <p>RESTful APIs, database design, server-side logic with Node.js, Express, and MongoDB</p>
-                    <div class="price">Starting at $50/hour</div>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-database"></i>
-                    <h3>Database Solutions</h3>
-                    <p>SQL database design, optimization, data migration, and cloud database management</p>
-                    <div class="price">Starting at $45/hour</div>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-code"></i>
-                    <h3>Full-Stack Web Apps</h3>
-                    <p>Complete web applications using MEAN/MERN stack with responsive design</p>
-                    <div class="price">Starting at $60/hour</div>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-plug"></i>
-                    <h3>API Integration</h3>
-                    <p>Third-party API integration, custom API development, and API documentation</p>
-                    <div class="price">Starting at $40/hour</div>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-shopping-cart"></i>
-                    <h3>E-commerce Solutions</h3>
-                    <p>Online stores with payment processing, inventory management, and user authentication</p>
-                    <div class="price">Starting at $70/hour</div>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-chart-line"></i>
-                    <h3>Data Analysis & Visualization</h3>
-                    <p>Market research, data analysis, and interactive web-based data visualization</p>
-                    <div class="price">Starting at $55/hour</div>
-                </div>
-            </div>
+    <!-- Projects Section -->
+    <section id="projects" class="resume-section">
+        <h2><i class='bx bx-folder-open'></i> Featured Projects</h2>
+        <div class="project-item">
+            <h3>Music Industry Market Analysis & Website Showcase <a href="#" class="project-link"><i class='bx bx-link-external'></i></a></h3>
+            <p class="project-tech">SQL, PostgreSQL, Data Analysis, Database Design, Web Development, HTML, CSS, JavaScript, Data Visualization</p>
+            <p>As part of a professional project, I conducted an in-depth analysis of trends and opportunities in the music industry, focusing on the rise of streaming platforms, AI-generated music, and emerging artists. Using SQL, I created and queried a database to examine market trends, user behavior, and competitor performance. I then developed a live website to present my findings in an interactive and visually engaging format. The site highlights key insights such as market share comparisons, user growth patterns, and the potential impact of AI-driven innovation in music. This project demonstrates my ability to manage technical aspects of databases, translate data into meaningful narratives, and deliver a polished, decision-support tool for business contexts.</p>
+        </div>
+        <div class="project-item">
+            <h3>Final Project Sneaker Store API <a href="https://github.com/4NDR0S/Final-Project-SneakerStoreAPI-" class="project-link"><i class='bx bx-link-external'></i></a></h3>
+            <p class="project-tech">Team Collaboration, MongoDB, Databases, Mongoose Web Server, HTTP, JavaScript, Trello, GitHub, Git</p>
+            <p>Developed SneakerStoreAPI, a RESTful API designed to manage an e-commerce sneaker store. Key features include product management with full CRUD operations, category classification for organizing products, user registration and authentication, and order processing with receipt generation and order tracking. The project architecture included controllers for business logic, Mongoose models for schema definitions, HTTP routes for API endpoints, and middleware for validation and error handling. Sample data was used for testing and development. This project showcases my ability to design and build scalable backend systems for real-world e-commerce applications using Node.js, Express, MongoDB, and Mongoose.</p>
+        </div>
+        <div class="project-item">
+            <h3>CSE 341 Project 1 <a href="https://github.com/FelixS2000/cse-341-project1" class="project-link"><i class='bx bx-link-external'></i></a></h3>
+            <p class="project-tech">MongoDB, PostgreSQL, JavaScript, JSON, HTML, Git, GitHub</p>
+            <p>Build a React/Node.js/MongoDB store inspiring adventurers to explore—from hiking essentials to stargazing gear. Features product catalog with filters, secure Stripe checkout, user accounts, wishlists, admin dashboard, and responsive PWA. Includes gear guides and social sharing. Perfect for developers creating adventure-focused stores. Code designed for the wild at heart.</p>
         </div>
     </section>
 
-    <section id="portfolio" class="portfolio">
-        <div class="container">
-            <h2>Featured Projects</h2>
-            <div class="portfolio-grid">
-                <div class="project-card">
-                    <h3>SneakerStore API</h3>
-                    <p>RESTful API for e-commerce sneaker store with full CRUD operations, user authentication, and order processing</p>
-                    <div class="tech-stack">
-                        <span>Node.js</span>
-                        <span>MongoDB</span>
-                        <span>Express</span>
-                        <span>Mongoose</span>
-                    </div>
-                    <a href="https://github.com/4NDR0S/Final-Project-SneakerStoreAPI-" target="_blank" class="project-link">View Project</a>
-                </div>
-                <div class="project-card">
-                    <h3>Music Industry Analysis</h3>
-                    <p>Interactive website showcasing market analysis of streaming platforms and AI-generated music trends</p>
-                    <div class="tech-stack">
-                        <span>SQL</span>
-                        <span>PostgreSQL</span>
-                        <span>JavaScript</span>
-                        <span>Data Visualization</span>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <h3>Adventure Store</h3>
-                    <p>React/Node.js/MongoDB e-commerce platform for outdoor gear with Stripe checkout and admin dashboard</p>
-                    <div class="tech-stack">
-                        <span>React</span>
-                        <span>Node.js</span>
-                        <span>MongoDB</span>
-                        <span>Stripe</span>
-                    </div>
-                    <a href="https://github.com/FelixS2000/cse-341-project1" target="_blank" class="project-link">View Project</a>
-                </div>
-                <div class="project-card">
-                    <h3>Chamber of Commerce Website</h3>
-                    <p>Business website for Hatillo Chamber of Commerce providing resources and support to local businesses</p>
-                    <div class="tech-stack">
-                        <span>HTML</span>
-                        <span>CSS</span>
-                        <span>JavaScript</span>
-                        <span>Node.js</span>
-                    </div>
-                </div>
-            </div>
+    <!-- Education Section -->
+    <section id="education" class="resume-section">
+        <h2><i class='bx bx-graduation'></i> Education</h2>
+        <div class="education-item">
+            <h3>Bachelor's of Software Development</h3>
+            <p class="school">Brigham Young University - Idaho</p>
+            <p class="date">January 2022 - December 2028</p>
+            <ul>
+                <li>Coded applications across diverse domains, showcasing advanced programming proficiency.</li>
+                <li>Crafted dynamic webpages adhering to industry standards and best practices.</li>
+            </ul>
+        </div>
+        <div class="education-item">
+            <h3>Associate Certificate in Web & Computer Programming</h3>
+            <p class="school">Brigham Young University-Idaho</p>
+            <p class="date">July 2023</p>
+            <ul>
+                <li>Engineered Single Page Applications (SPAs) utilizing JavaScript and Node.js, improving user experience.</li>
+                <li>Orchestrated seamless teamwork in online projects, promoting robust collaboration and effective communication.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="resume-section">
+        <h2><i class='bx bx-award'></i> Certifications</h2>
+        <div class="certification-item">
+            <h3>Paragon One Certificate</h3>
+            <p class="issuer">Paragon One</p>
+            <p class="date">Issued Dec 2023</p>
+        </div>
+        <div class="certification-item">
+            <h3>Web and Computer Programming</h3>
+            <p class="issuer">Brigham Young University - Idaho</p>
+            <p class="date">Issued Jul 2023</p>
+        </div>
+        <div class="certification-item">
+            <h3>Industrial Maintenance Electronics Certification</h3>
+            <p class="issuer">Instituto Nacional de Formación Técnico Profesional - INFOTEP</p>
+        </div>
+        <div class="certification-item">
+            <h3>Electronic Technician Certified</h3>
+            <p class="issuer">Instituto Nacional de Formación Técnico Profesional - INFOTEP</p>
         </div>
     </section>
 
