@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Type Race</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="logo-wrap">
+          <span class="logo-mark">TR</span>
+          <span class="logo-text">Type Race</span>
+        </div>
+        <div id="connectionStatus" class="connection-status" aria-live="polite">Connecting...</div>
+      </header>
+
+      <main class="game-container">
+        <section id="lobbyScreen" class="screen active">
+          <div class="panel hero-panel">
+            <p class="eyebrow">Real-time typing battle</p>
+            <h1>Type Race</h1>
+            <p class="subtitle">Join a room, race the same sentence, and outscore your friends across three rounds.</p>
+
+            <div class="card-grid">
+              <div class="card local-card">
+                <label for="playerNameInput">Player name</label>
+                <input id="playerNameInput" type="text" maxlength="20" placeholder="Enter your name" aria-label="Player name" />
+                <button id="createRoomBtn" class="primary-btn">Create Room</button>
+              </div>
+
+              <div class="card local-card">
+                <label for="roomCodeInput">Room code</label>
+                <input id="roomCodeInput" type="text" maxlength="4" placeholder="AB12" aria-label="Room code" />
+                <button id="joinRoomBtn" class="secondary-btn">Join Room</button>
+              </div>
+            </div>
+
+            <div id="statusMessage" class="status-message" aria-live="polite"></div>
+          </div>
+
+          <div class="panel rules-panel">
+            <h2>Rules</h2>
+            <ol>
+              <li>Join a room with 2–8 players.</li>
+              <li>Everyone receives the same sentence.</li>
+              <li>Wait for the countdown.</li>
+              <li>Type the sentence exactly as shown.</li>
+              <li>Every correctly completed word increases your combo.</li>
+              <li>A typing mistake resets your combo to 1x.</li>
+              <li>The first player to finish gets 1st place.</li>
+              <li>Other players have up to 30 seconds after the first finish.</li>
+              <li>Players who do not finish are ranked by progress and score.</li>
+              <li>The match contains 3 rounds.</li>
+              <li>The player with the highest final score wins the match.</li>
+            </ol>
+          </div>
+        </section>
+
+        <section id="roomScreen" class="screen hidden">
+          <div class="panel room-panel">
+            <div class="room-header-row">
+              <div>
+                <p class="eyebrow">Room</p>
+                <h2 id="roomCodeDisplay">ROOM</h2>
+              </div>
+              <button id="startGameBtn" class="primary-btn" type="button">Start Game</button>
+            </div>
+
+            <div class="player-list-wrap">
+              <h3>Players</h3>
+              <ul id="playersList" class="players-list"></ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="countdownScreen" class="screen hidden">
+          <div class="panel countdown-panel">
+            <p class="eyebrow">Round</p>
+            <h2 id="countdownRoundLabel">Round 1</h2>
+            <div id="countdownValue" class="countdown-value">3</div>
+            <p id="countdownDifficulty" class="countdown-detail">Difficulty: Medium</p>
+          </div>
+        </section>
+
+        <section id="gameScreen" class="screen hidden">
+          <div class="panel race-panel">
+            <div class="race-header">
+              <div>
+                <p class="eyebrow">Current Match</p>
+                <h2 id="roundNumber">Round 1/3</h2>
+              </div>
+              <div class="stats-inline">
+                <span>Score: <strong id="currentScore">0</strong></span>
+                <span>Combo: <strong id="currentCombo">1x</strong></span>
+                <span>Difficulty: <strong id="difficultyLabel">Medium</strong></span>
+              </div>
+            </div>
+
+            <div class="challenge-block">
+              <p class="label">Sentence</p>
+              <div id="challengeText" class="challenge-text">Loading challenge...</div>
+            </div>
+
+            <label for="typingInput" class="label">Type here</label>
+            <textarea id="typingInput" rows="4" maxlength="250" placeholder="Start typing..." aria-label="Typing area"></textarea>
+
+            <div class="progress-wrap">
+              <div class="progress-meta">
+                <span>Progress</span>
+                <strong id="progressText">0%</strong>
+              </div>
+              <div class="progress-bar">
+                <div id="progressBarFill" class="progress-bar-fill"></div>
+              </div>
+            </div>
+
+            <div class="standings-box">
+              <h3>Players</h3>
+              <ul id="standingsList" class="standings-list"></ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="resultsScreen" class="screen hidden">
+          <div class="panel results-panel">
+            <h2>🏁 Round Results</h2>
+            <ul id="resultsList" class="results-list"></ul>
+            <div id="resultsStatus" class="results-status">Waiting for the host...</div>
+            <button id="nextRoundBtn" class="primary-btn hidden" type="button">Next Round</button>
+          </div>
+        </section>
+
+        <section id="finalScreen" class="screen hidden">
+          <div class="panel final-panel">
+            <h2>🏆 Final Results</h2>
+            <p id="finalMessage" class="final-message">Highest total score wins the match.</p>
+            <ul id="finalLeaderboard" class="results-list"></ul>
+            <button id="playAgainBtn" class="primary-btn" type="button">Play Again</button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/client.js"></script>
+  </body>
+</html>
