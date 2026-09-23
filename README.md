@@ -54,7 +54,7 @@ A professional freelance website showcasing Felix Guzman's software development 
 ## Contact Information
 
 - **Phone**: +1 809-307-8324
-- **Email**: fguzmanceri@gmail.com
+- **Email**: [fguzmanceri@gmail.com](mailto:fguzmanceri@gmail.com)
 - **LinkedIn**: [Felix Samuel Guzman](https://www.linkedin.com/in/felix-samuel-guzman-065298211)
 - **Location**: Santo Domingo, Dominican Republic
 
@@ -68,7 +68,7 @@ A professional freelance website showcasing Felix Guzman's software development 
 
 ## Project Structure
 
-```
+```text
 /
 ├── index.html          # Main HTML file
 ├── styles.css          # CSS styles and responsive design
