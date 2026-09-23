@@ -1,15 +1,19 @@
 # Felix Guzman - Freelance Developer Website
 
-A professional freelance website showcasing Felix Guzman's software development skills and services.
+A professional freelance website showcasing Felix Guzman's
+software development skills and services.
 
 ## Features
 
-- **Modern Design**: Clean, professional layout with smooth animations
-- **Responsive**: Works perfectly on desktop, tablet, and mobile devices
+- **Modern Design**: Clean, professional layout with smooth
+  animations
+- **Responsive**: Works perfectly on desktop, tablet, and mobile
+  devices
 - **Service Showcase**: Detailed pricing and service offerings
 - **Portfolio Section**: Featured projects with technology stacks
 - **Contact Form**: Easy-to-use contact form with email integration
-- **Skills Display**: Comprehensive list of technical skills and expertise
+- **Skills Display**: Comprehensive list of technical skills and
+  expertise
 
 ## Services Offered
 
@@ -55,7 +59,7 @@ A professional freelance website showcasing Felix Guzman's software development 
 
 - **Phone**: +1 809-307-8324
 - **Email**: [fguzmanceri@gmail.com](mailto:fguzmanceri@gmail.com)
-- **LinkedIn**: [Felix Samuel Guzman](https://www.linkedin.com/in/felix-samuel-guzman-065298211)
+- **LinkedIn**: [Felix Samuel Guzman](https://linkedin.com/in/felix-samuel-guzman)
 - **Location**: Santo Domingo, Dominican Republic
 
 ## How to Use
@@ -78,16 +82,21 @@ A professional freelance website showcasing Felix Guzman's software development 
 
 ## Featured Projects
 
-- **SneakerStore API**: RESTful API for e-commerce with full CRUD operations
-- **Music Industry Analysis**: Interactive data visualization website
-- **Adventure Store**: Full-stack e-commerce platform with React and Node.js
-- **Chamber of Commerce Website**: Business website for local community
+- **SneakerStore API**: RESTful API for e-commerce with full CRUD
+  operations
+- **Music Industry Analysis**: Interactive data visualization
+  website
+- **Adventure Store**: Full-stack e-commerce platform with React and
+  Node.js
+- **Chamber of Commerce Website**: Business website for local
+  community
 
 ## Skills & Expertise
 
 - **Backend**: Node.js, Express.js, MongoDB, SQL, PostgreSQL
 - **Frontend**: JavaScript, HTML/CSS, React.js, Responsive Design
 - **Tools**: Git/GitHub, Google Cloud, Trello, API Integration
-- **Specialties**: Database design, RESTful APIs, Full-stack development
+- **Specialties**: Database design, RESTful APIs, Full-stack
+  development
 
 Ready to bring your project to life? Get in touch today!
