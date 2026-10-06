@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>TechDesk API Tester</title>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #f4f6f8;
+      color: #222;
+    }
+
+    h1 {
+      margin-bottom: 5px;
+    }
+
+    .subtitle {
+      color: #666;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+
+    label {
+      display: block;
+      margin-top: 12px;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 11px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 15px;
+    }
+
+    button {
+      margin-top: 15px;
+      margin-right: 8px;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 6px;
+      background: #2563eb;
+      color: white;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    pre {
+      background: #111827;
+      color: #e5e7eb;
+      padding: 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+      margin-top: 15px;
+    }
+
+    .success {
+      color: green;
+      font-weight: bold;
+    }
+
+    .error {
+      color: red;
+      font-weight: bold;
+    }
+
+    .warning {
+      color: #b45309;
+      font-weight: bold;
+    }
+
+    .status {
+      margin-top: 15px;
+    }
+
+    .section-number {
+      color: #2563eb;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <h1>TechDesk API Tester</h1>
+
+  <p class="subtitle">
+    Browser-based testing interface for the TechDesk backend.
+  </p>
+
+
+  <!-- ==========================================
+       LOGIN
+       ========================================== -->
+
+  <div class="card">
+
+    <h2>
+      <span class="section-number">1.</span>
+      Login
+    </h2>
+
+    <label for="email">
+      Email
+    </label>
+
+    <input
+      type="email"
+      id="email"
+      value="carlos.test@example.com"
+      placeholder="Enter email"
+    >
+
+    <label for="password">
+      Password
+    </label>
+
+    <input
+      type="password"
+      id="password"
+      value="TechDesk123!"
+      placeholder="Enter password"
+    >
+
+    <button onclick="login()">
+      Login
+    </button>
+
+    <p
+      id="loginStatus"
+      class="status"
+    ></p>
+
+  </div>
+
+
+  <!-- ==========================================
+       TOKEN
+       ========================================== -->
+
+  <div class="card">
+
+    <h2>
+      <span class="section-number">2.</span>
+      Authentication Token
+    </h2>
+
+    <pre id="tokenOutput">No token yet.</pre>
+
+  </div>
+
+
+  <!-- ==========================================
+       PROFILE
+       ========================================== -->
+
+  <div class="card">
+
+    <h2>
+      <span class="section-number">3.</span>
+      Test Authentication
+    </h2>
+
+    <button onclick="getProfile()">
+      Test My Profile
+    </button>
+
+    <pre id="profileOutput">No request made yet.</pre>
+
+  </div>
+
+
+  <!-- ==========================================
+       TICKETS
+       ========================================== -->
+
+  <div class="card">
+
+    <h2>
+      <span class="section-number">4.</span>
+      Ticket Management
+    </h2>
+
+    <button onclick="getTickets()">
+      Get Tickets
+    </button>
+
+    <button onclick="updateTicket()">
+      Update Ticket #1
+    </button>
+
+    <button onclick="assignTicket()">
+      Assign Ticket #1 to Carlos
+    </button>
+
+    <pre id="ticketOutput">No ticket request made yet.</pre>
+
+  </div>
+
+
+  <!-- ==========================================
+       JAVASCRIPT
+       ========================================== -->
+
+  <script>
+
+    const API_URL = "http://localhost:5000";
+
+    let token = "";
+
+
+    // ==========================================
+    // LOGIN
+    // ==========================================
+
+    async function login() {
+
+      const email =
+        document.getElementById("email").value;
+
+      const password =
+        document.getElementById("password").value;
+
+      const status =
+        document.getElementById("loginStatus");
+
+      try {
+
+        status.textContent =
+          "Logging in...";
+
+        status.className =
+          "status";
+
+        const response =
+          await fetch(
+            `${API_URL}/api/auth/login`,
+            {
+              method: "POST",
+
+              headers: {
+                "Content-Type":
+                  "application/json"
+              },
+
+              body: JSON.stringify({
+                email,
+                password
+              })
+            }
+          );
+
+        const data =
+          await response.json();
+
+
+        if (!response.ok) {
+
+          status.textContent =
+            `Login failed: ${data.message}`;
+
+          status.className =
+            "status error";
+
+          return;
+        }
+
+
+        token = data.token;
+
+
+        document.getElementById(
+          "tokenOutput"
+        ).textContent = token;
+
+
+        status.textContent =
+          `Login successful! Logged in as ${data.user.first_name} ${data.user.last_name} (${data.user.role})`;
+
+        status.className =
+          "status success";
+
+
+      } catch (error) {
+
+        status.textContent =
+          `Connection error: ${error.message}`;
+
+        status.className =
+          "status error";
+      }
+    }
+
+
+    // ==========================================
+    // TEST AUTHENTICATION
+    // ==========================================
+
+    async function getProfile() {
+
+      const output =
+        document.getElementById(
+          "profileOutput"
+        );
+
+
+      if (!token) {
+
+        output.textContent =
+          "Please login first.";
+
+        return;
+      }
+
+
+      try {
+
+        const response =
+          await fetch(
+            `${API_URL}/api/auth/me`,
+            {
+              method: "GET",
+
+              headers: {
+                "Authorization":
+                  `Bearer ${token}`
+              }
+            }
+          );
+
+
+        const data =
+          await response.json();
+
+
+        output.textContent =
+          JSON.stringify(
+            data,
+            null,
+            2
+          );
+
+
+      } catch (error) {
+
+        output.textContent =
+          `Error: ${error.message}`;
+      }
+    }
+
+
+    // ==========================================
+    // GET ALL TICKETS
+    // ==========================================
+
+    async function getTickets() {
+
+      const output =
+        document.getElementById(
+          "ticketOutput"
+        );
+
+
+      if (!token) {
+
+        output.textContent =
+          "Please login first.";
+
+        return;
+      }
+
+
+      try {
+
+        const response =
+          await fetch(
+            `${API_URL}/api/tickets`,
+            {
+              method: "GET",
+
+              headers: {
+                "Authorization":
+                  `Bearer ${token}`
+              }
+            }
+          );
+
+
+        const data =
+          await response.json();
+
+
+        output.textContent =
+          JSON.stringify(
+            data,
+            null,
+            2
+          );
+
+
+      } catch (error) {
+
+        output.textContent =
+          `Error: ${error.message}`;
+      }
+    }
+
+
+    // ==========================================
+    // UPDATE TICKET
+    // Technician/Admin only
+    // ==========================================
+
+    async function updateTicket() {
+
+      const output =
+        document.getElementById(
+          "ticketOutput"
+        );
+
+
+      if (!token) {
+
+        output.textContent =
+          "Please login first.";
+
+        return;
+      }
+
+
+      try {
+
+        const response =
+          await fetch(
+            `${API_URL}/api/tickets/1`,
+            {
+              method: "PUT",
+
+              headers: {
+
+                "Content-Type":
+                  "application/json",
+
+                "Authorization":
+                  `Bearer ${token}`
+              },
+
+              body: JSON.stringify({
+
+                status:
+                  "in_progress",
+
+                priority:
+                  "high"
+
+              })
+            }
+          );
+
+
+        const data =
+          await response.json();
+
+
+        output.textContent =
+          JSON.stringify(
+            data,
+            null,
+            2
+          );
+
+
+      } catch (error) {
+
+        output.textContent =
+          `Error: ${error.message}`;
+      }
+    }
+
+
+    // ==========================================
+    // ASSIGN TICKET
+    // Technician/Admin only
+    // ==========================================
+
+    async function assignTicket() {
+
+      const output =
+        document.getElementById(
+          "ticketOutput"
+        );
+
+
+      if (!token) {
+
+        output.textContent =
+          "Please login first.";
+
+        return;
+      }
+
+
+      try {
+
+        const response =
+          await fetch(
+            `${API_URL}/api/tickets/1/assign`,
+            {
+              method: "PUT",
+
+              headers: {
+
+                "Content-Type":
+                  "application/json",
+
+                "Authorization":
+                  `Bearer ${token}`
+              },
+
+              body: JSON.stringify({
+
+                assigned_to: 4
+
+              })
+            }
+          );
+
+
+        const data =
+          await response.json();
+
+
+        output.textContent =
+          JSON.stringify(
+            data,
+            null,
+            2
+          );
+
+
+      } catch (error) {
+
+        output.textContent =
+          `Error: ${error.message}`;
+      }
+    }
+
+  </script>
+
+</body>
+
+</html>
