@@ -1,589 +1,708 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-  <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TechDesk API Tester</title>
 
   <style>
-
-    * {
-      box-sizing: border-box;
-    }
-
     body {
       font-family: Arial, sans-serif;
-      max-width: 1000px;
-      margin: 40px auto;
-      padding: 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 30px;
       background: #f4f6f8;
       color: #222;
     }
-
-    h1 {
-      margin-bottom: 5px;
-    }
-
-    .subtitle {
-      color: #666;
-      margin-bottom: 30px;
-    }
-
-    .card {
+    h1 { margin-bottom: 5px; }
+    h2 { margin-top: 0; }
+    .subtitle { color: #666; margin-bottom: 30px; }
+    .section {
       background: white;
-      padding: 25px;
+      padding: 20px;
       margin-bottom: 20px;
       border-radius: 10px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     }
-
-    h2 {
-      margin-top: 0;
-    }
-
-    label {
-      display: block;
-      margin-top: 12px;
-      margin-bottom: 5px;
-      font-weight: bold;
-    }
-
-    input {
+    input, textarea, select {
       width: 100%;
-      padding: 11px;
+      padding: 10px;
+      margin-top: 6px;
+      margin-bottom: 14px;
       border: 1px solid #ccc;
       border-radius: 6px;
-      font-size: 15px;
+      box-sizing: border-box;
+      font-size: 14px;
     }
-
+    textarea { min-height: 100px; resize: vertical; }
     button {
-      margin-top: 15px;
-      margin-right: 8px;
       padding: 10px 16px;
+      margin: 5px 5px 5px 0;
       border: none;
       border-radius: 6px;
+      cursor: pointer;
       background: #2563eb;
       color: white;
-      cursor: pointer;
-      font-size: 15px;
+      font-size: 14px;
     }
-
-    button:hover {
-      background: #1d4ed8;
-    }
-
+    button:hover { opacity: 0.9; }
+    .danger { background: #dc2626; }
+    .success { color: #15803d; font-weight: bold; }
+    .error { color: #dc2626; font-weight: bold; }
     pre {
       background: #111827;
       color: #e5e7eb;
       padding: 15px;
-      border-radius: 8px;
+      border-radius: 6px;
       overflow-x: auto;
       white-space: pre-wrap;
-      word-break: break-word;
-      margin-top: 15px;
+      word-wrap: break-word;
     }
-
-    .success {
-      color: green;
-      font-weight: bold;
+    label { font-weight: bold; display: block; margin-top: 5px; }
+    .status-box {
+      padding: 12px;
+      background: #f3f4f6;
+      border-radius: 6px;
+      margin-bottom: 15px;
     }
-
-    .error {
-      color: red;
-      font-weight: bold;
+    .permission-box {
+      background: #eff6ff;
+      border-left: 4px solid #2563eb;
+      padding: 12px;
+      margin-top: 10px;
     }
-
-    .warning {
-      color: #b45309;
-      font-weight: bold;
-    }
-
-    .status {
-      margin-top: 15px;
-    }
-
-    .section-number {
-      color: #2563eb;
-    }
-
+    .small { color: #666; font-size: 13px; }
   </style>
-
 </head>
 
 <body>
 
   <h1>TechDesk API Tester</h1>
+  <p class="subtitle">Browser-based testing interface for the TechDesk backend.</p>
 
-  <p class="subtitle">
-    Browser-based testing interface for the TechDesk backend.
-  </p>
+  <!-- ===================================================== -->
+  <!-- 1. LOGIN -->
+  <!-- ===================================================== -->
+  <div class="section">
+    <h2>1. Login</h2>
 
+    <label for="loginEmail">Email</label>
+    <input type="email" id="loginEmail" placeholder="example@email.com" />
 
-  <!-- ==========================================
-       LOGIN
-       ========================================== -->
+    <label for="loginPassword">Password</label>
+    <input type="password" id="loginPassword" placeholder="Password" />
 
-  <div class="card">
+    <button onclick="login()">Login</button>
 
-    <h2>
-      <span class="section-number">1.</span>
-      Login
-    </h2>
-
-    <label for="email">
-      Email
-    </label>
-
-    <input
-      type="email"
-      id="email"
-      value="carlos.test@example.com"
-      placeholder="Enter email"
-    >
-
-    <label for="password">
-      Password
-    </label>
-
-    <input
-      type="password"
-      id="password"
-      value="TechDesk123!"
-      placeholder="Enter password"
-    >
-
-    <button onclick="login()">
-      Login
-    </button>
-
-    <p
-      id="loginStatus"
-      class="status"
-    ></p>
-
+    <div id="loginStatus" class="status-box">Not logged in.</div>
   </div>
 
-
-  <!-- ==========================================
-       TOKEN
-       ========================================== -->
-
-  <div class="card">
-
-    <h2>
-      <span class="section-number">2.</span>
-      Authentication Token
-    </h2>
-
+  <!-- ===================================================== -->
+  <!-- 2. TOKEN -->
+  <!-- ===================================================== -->
+  <div class="section">
+    <h2>2. Authentication Token</h2>
     <pre id="tokenOutput">No token yet.</pre>
-
   </div>
 
-
-  <!-- ==========================================
-       PROFILE
-       ========================================== -->
-
-  <div class="card">
-
-    <h2>
-      <span class="section-number">3.</span>
-      Test Authentication
-    </h2>
-
-    <button onclick="getProfile()">
-      Test My Profile
-    </button>
-
-    <pre id="profileOutput">No request made yet.</pre>
-
+  <!-- ===================================================== -->
+  <!-- 3. AUTHENTICATION -->
+  <!-- ===================================================== -->
+  <div class="section">
+    <h2>3. Test Authentication</h2>
+    <button onclick="testAuth()">Test My Profile</button>
+    <pre id="authOutput">No authentication request made yet.</pre>
   </div>
 
+  <!-- ===================================================== -->
+  <!-- 4. TICKET MANAGEMENT -->
+  <!-- ===================================================== -->
+  <div class="section">
+    <h2>4. Ticket Management</h2>
 
-  <!-- ==========================================
-       TICKETS
-       ========================================== -->
+    <div class="permission-box">
+      <strong>Ticket permissions:</strong>
+      <ul>
+        <li><strong>Employee:</strong> Can view and create tickets.</li>
+        <li><strong>Technician:</strong> Can view, create, update, assign, and troubleshoot tickets.</li>
+        <li><strong>Admin:</strong> Full ticket management permissions.</li>
+      </ul>
+      <p class="small">
+        The authenticated user's ID is taken from the JWT.
+        You do not manually provide a "created_by" value.
+      </p>
+    </div>
 
-  <div class="card">
+    <br />
 
-    <h2>
-      <span class="section-number">4.</span>
-      Ticket Management
-    </h2>
+    <button onclick="getTickets()">Get Tickets</button>
+    <button onclick="getTicket()">View Ticket #1</button>
+    <button onclick="getTicketHistory()">View Ticket #1 History</button>
 
-    <button onclick="getTickets()">
-      Get Tickets
-    </button>
+    <hr />
 
-    <button onclick="updateTicket()">
-      Update Ticket #1
-    </button>
+    <!-- CREATE TICKET -->
+    <h3>Create New Ticket</h3>
 
-    <button onclick="assignTicket()">
-      Assign Ticket #1 to Carlos
-    </button>
+    <label for="ticketTitle">Title</label>
+    <input type="text" id="ticketTitle" placeholder="Example: Laptop cannot connect to Wi-Fi" />
+
+    <label for="ticketDescription">Description</label>
+    <textarea id="ticketDescription" placeholder="Describe the technical problem..."></textarea>
+
+    <label for="ticketPriority">Priority</label>
+    <select id="ticketPriority">
+      <option value="low">Low</option>
+      <option value="medium" selected>Medium</option>
+      <option value="high">High</option>
+      <option value="critical">Critical</option>
+    </select>
+
+    <label for="ticketCategory">Category</label>
+    <select id="ticketCategory">
+      <option value="">Select category</option>
+      <option value="hardware">Hardware</option>
+      <option value="software">Software</option>
+      <option value="network">Network</option>
+      <option value="account">Account</option>
+      <option value="security">Security</option>
+      <option value="other">Other</option>
+    </select>
+
+    <label for="ticketAssetId">Asset ID (optional)</label>
+    <input type="number" id="ticketAssetId" placeholder="Example: 1" />
+
+    <button onclick="createTicket()">Create Ticket</button>
+
+    <hr />
+
+    <!-- UPDATE -->
+    <h3>Update Ticket #1</h3>
+    <p class="small">This action should only work for technicians and administrators.</p>
+
+    <label for="updateStatus">Status</label>
+    <select id="updateStatus">
+      <option value="open">Open</option>
+      <option value="in_progress">In Progress</option>
+      <option value="resolved">Resolved</option>
+      <option value="closed">Closed</option>
+    </select>
+
+    <label for="updatePriority">Priority</label>
+    <select id="updatePriority">
+      <option value="low">Low</option>
+      <option value="medium">Medium</option>
+      <option value="high">High</option>
+      <option value="critical">Critical</option>
+    </select>
+
+    <button onclick="updateTicket()">Update Ticket #1</button>
+
+    <hr />
+
+    <!-- ASSIGN -->
+    <h3>Assign Ticket #1</h3>
+    <p class="small">This action should only work for technicians and administrators.</p>
+
+    <label for="assignedTechnician">Technician User ID</label>
+    <input type="number" id="assignedTechnician" value="4" placeholder="Example: 4" />
+
+    <button onclick="assignTicket()">Assign Ticket #1 to Technician</button>
 
     <pre id="ticketOutput">No ticket request made yet.</pre>
-
   </div>
 
+  <!-- ===================================================== -->
+  <!-- 5. TROUBLESHOOTING -->
+  <!-- ===================================================== -->
+  <div class="section">
+    <h2>5. Troubleshooting Workflow</h2>
 
-  <!-- ==========================================
-       JAVASCRIPT
-       ========================================== -->
+    <div class="permission-box">
+      <strong>Troubleshooting permissions:</strong>
+      <ul>
+        <li><strong>Employee:</strong> Can view troubleshooting steps.</li>
+        <li><strong>Technician:</strong> Can view and add troubleshooting steps.</li>
+        <li><strong>Admin:</strong> Can view and add troubleshooting steps.</li>
+      </ul>
+    </div>
 
+    <br />
+
+    <label for="troubleshootingTicketId">Ticket ID</label>
+    <input type="number" id="troubleshootingTicketId" value="1" min="1" placeholder="Example: 1" />
+
+    <button onclick="getTroubleshootingSteps()">View Troubleshooting Steps</button>
+
+    <hr />
+
+    <h3>Add Troubleshooting Step</h3>
+
+    <label for="troubleshootingStepNumber">Step Number</label>
+    <input type="number" id="troubleshootingStepNumber" value="1" min="1" placeholder="Example: 1" />
+
+    <label for="troubleshootingDescription">Description</label>
+    <textarea id="troubleshootingDescription" placeholder="Describe the troubleshooting action..."></textarea>
+
+    <label for="troubleshootingResult">Result</label>
+    <textarea id="troubleshootingResult" placeholder="Describe what happened after performing this step..."></textarea>
+
+    <label for="troubleshootingCompleted">Completed</label>
+    <select id="troubleshootingCompleted">
+      <option value="false">No</option>
+      <option value="true">Yes</option>
+    </select>
+
+    <button onclick="addTroubleshootingStep()">Add Troubleshooting Step</button>
+
+    <pre id="troubleshootingOutput">No troubleshooting request made yet.</pre>
+  </div>
+
+  <!-- ===================================================== -->
+  <!-- 6. REGISTER -->
+  <!-- ===================================================== -->
+  <div class="section">
+    <h2>6. Register New User</h2>
+
+    <div class="permission-box">
+      <strong>Security:</strong>
+      <p>Public registration creates an <strong>employee</strong> account.</p>
+      <p>Users cannot register themselves as technicians or administrators.</p>
+    </div>
+
+    <br />
+
+    <label for="registerFirstName">First Name</label>
+    <input type="text" id="registerFirstName" placeholder="First name" />
+
+    <label for="registerLastName">Last Name</label>
+    <input type="text" id="registerLastName" placeholder="Last name" />
+
+    <label for="registerEmail">Email</label>
+    <input type="email" id="registerEmail" placeholder="newuser@example.com" />
+
+    <label for="registerPassword">Password</label>
+    <input type="password" id="registerPassword" placeholder="Minimum 8 characters" />
+
+    <label for="registerDepartment">Department</label>
+    <input type="text" id="registerDepartment" placeholder="Example: Sales" />
+
+    <button onclick="registerUser()">Register Employee</button>
+
+    <pre id="registerOutput">No registration request made yet.</pre>
+  </div>
+
+  <!-- ===================================================== -->
+  <!-- 7. AUDIT LOGS -->
+  <!-- ===================================================== -->
+  <div class="section">
+    <h2>7. Audit Logs</h2>
+
+    <div class="permission-box">
+      <strong>Audit Log permissions:</strong>
+      <ul>
+        <li><strong>Employee:</strong> Cannot view or create audit logs.</li>
+        <li><strong>Technician:</strong> Can view and create audit logs.</li>
+        <li><strong>Admin:</strong> Can view and create audit logs.</li>
+      </ul>
+    </div>
+
+    <br />
+
+    <button onclick="getAuditLogs()">Get Audit Logs</button>
+    <button onclick="getAuditLogById()">View Audit Log #1</button>
+
+    <hr />
+
+    <h3>Create Test Audit Log</h3>
+
+    <label for="auditAction">Action</label>
+    <input type="text" id="auditAction" placeholder="TEST_AUDIT" />
+
+    <label for="auditEntityType">Entity Type</label>
+    <input type="text" id="auditEntityType" placeholder="ticket" />
+
+    <label for="auditEntityId">Entity ID</label>
+    <input type="number" id="auditEntityId" placeholder="4" />
+
+    <label for="auditDetails">Details</label>
+    <textarea id="auditDetails" placeholder="Testing TechDesk audit logging"></textarea>
+
+    <button onclick="createAuditLog()">Create Audit Log</button>
+
+    <pre id="auditResult">No audit request made yet.</pre>
+  </div>
+
+  <!-- ===================================================== -->
+  <!-- JAVASCRIPT -->
+  <!-- ===================================================== -->
   <script>
 
     const API_URL = "http://localhost:5000";
 
-    let token = "";
+    // Change this if your server mounts audit logs somewhere else
+    // (for example "/api/audit-logs").
+    const AUDIT_PATH = "/api/audit";
+
+    let authToken = "";
 
 
-    // ==========================================
-    // LOGIN
-    // ==========================================
+    // =====================================================
+    // HELPER FUNCTIONS
+    // =====================================================
 
-    async function login() {
+    function showJSON(elementId, data) {
+      document.getElementById(elementId).textContent =
+        JSON.stringify(data, null, 2);
+    }
 
-      const email =
-        document.getElementById("email").value;
+    function getHeaders() {
+      return {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${authToken}`
+      };
+    }
 
-      const password =
-        document.getElementById("password").value;
+    function checkToken() {
+      if (!authToken) {
+        alert("Please login first so the application has an authentication token.");
+        return false;
+      }
+      return true;
+    }
 
-      const status =
-        document.getElementById("loginStatus");
+    // Prevents server text from being interpreted as HTML
+    function escapeHTML(value) {
+      const div = document.createElement("div");
+      div.textContent = value == null ? "" : String(value);
+      return div.innerHTML;
+    }
+
+    // Shared helper: sends an authenticated request, shows the result
+    // in the given <pre>, and returns true if the response was OK.
+    async function apiRequest(outputId, path, options = {}) {
+      if (!checkToken()) return false;
 
       try {
+        const response = await fetch(`${API_URL}${path}`, {
+          method: "GET",
+          headers: getHeaders(),
+          ...options
+        });
 
-        status.textContent =
-          "Logging in...";
+        let data;
+        try {
+          data = await response.json();
+        } catch {
+          data = null;
+        }
 
-        status.className =
-          "status";
+        showJSON(outputId, { status: response.status, data });
+        return response.ok;
 
-        const response =
-          await fetch(
-            `${API_URL}/api/auth/login`,
-            {
-              method: "POST",
+      } catch (error) {
+        showJSON(outputId, { error: error.message });
+        return false;
+      }
+    }
 
-              headers: {
-                "Content-Type":
-                  "application/json"
-              },
+    function clearFields(ids) {
+      ids.forEach(id => {
+        document.getElementById(id).value = "";
+      });
+    }
 
-              body: JSON.stringify({
-                email,
-                password
-              })
-            }
-          );
 
-        const data =
-          await response.json();
+    // =====================================================
+    // LOGIN
+    // =====================================================
 
+    async function login() {
+      const email = document.getElementById("loginEmail").value.trim();
+      const password = document.getElementById("loginPassword").value;
+      const status = document.getElementById("loginStatus");
+
+      if (!email || !password) {
+        status.innerHTML =
+          `<span class="error">Please enter email and password.</span>`;
+        return;
+      }
+
+      try {
+        const response = await fetch(`${API_URL}/api/auth/login`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
 
         if (!response.ok) {
-
-          status.textContent =
-            `Login failed: ${data.message}`;
-
-          status.className =
-            "status error";
-
+          status.innerHTML =
+            `<span class="error">Login failed: ${escapeHTML(data.message || "Unknown error")}</span>`;
+          showJSON("tokenOutput", data);
           return;
         }
 
+        authToken = data.token;
 
-        token = data.token;
+        status.innerHTML =
+          `<span class="success">
+            Login successful! Logged in as
+            ${escapeHTML(data.user.first_name)}
+            ${escapeHTML(data.user.last_name)}
+            (${escapeHTML(data.user.role)})
+          </span>`;
 
-
-        document.getElementById(
-          "tokenOutput"
-        ).textContent = token;
-
-
-        status.textContent =
-          `Login successful! Logged in as ${data.user.first_name} ${data.user.last_name} (${data.user.role})`;
-
-        status.className =
-          "status success";
-
+        document.getElementById("tokenOutput").textContent = authToken;
 
       } catch (error) {
-
-        status.textContent =
-          `Connection error: ${error.message}`;
-
-        status.className =
-          "status error";
+        status.innerHTML =
+          `<span class="error">Connection error: ${escapeHTML(error.message)}</span>`;
+        console.error(error);
       }
     }
 
 
-    // ==========================================
+    // =====================================================
     // TEST AUTHENTICATION
-    // ==========================================
+    // =====================================================
 
-    async function getProfile() {
-
-      const output =
-        document.getElementById(
-          "profileOutput"
-        );
+    function testAuth() {
+      return apiRequest("authOutput", "/api/auth/me");
+    }
 
 
-      if (!token) {
+    // =====================================================
+    // TICKETS
+    // =====================================================
 
-        output.textContent =
-          "Please login first.";
+    function getTickets() {
+      return apiRequest("ticketOutput", "/api/tickets");
+    }
 
+    function getTicket() {
+      return apiRequest("ticketOutput", "/api/tickets/1");
+    }
+
+    function getTicketHistory() {
+      return apiRequest("ticketOutput", "/api/history/ticket/1");
+    }
+
+    async function createTicket() {
+      if (!checkToken()) return;
+
+      const title = document.getElementById("ticketTitle").value.trim();
+      const description = document.getElementById("ticketDescription").value.trim();
+      const priority = document.getElementById("ticketPriority").value;
+      const category = document.getElementById("ticketCategory").value;
+      const assetIdValue = document.getElementById("ticketAssetId").value.trim();
+
+      if (!title || !description) {
+        showJSON("ticketOutput", { error: "Title and description are required." });
         return;
       }
 
+      const body = {
+        title,
+        description,
+        priority,
+        category: category || null
+      };
 
-      try {
+      if (assetIdValue) {
+        body.asset_id = Number(assetIdValue);
+      }
 
-        const response =
-          await fetch(
-            `${API_URL}/api/auth/me`,
-            {
-              method: "GET",
+      const ok = await apiRequest("ticketOutput", "/api/tickets", {
+        method: "POST",
+        body: JSON.stringify(body)
+      });
 
-              headers: {
-                "Authorization":
-                  `Bearer ${token}`
-              }
-            }
-          );
+      if (ok) {
+        clearFields([
+          "ticketTitle",
+          "ticketDescription",
+          "ticketCategory",
+          "ticketAssetId"
+        ]);
+      }
+    }
+
+    function updateTicket() {
+      const status = document.getElementById("updateStatus").value;
+      const priority = document.getElementById("updatePriority").value;
+
+      return apiRequest("ticketOutput", "/api/tickets/1", {
+        method: "PUT",
+        body: JSON.stringify({ status, priority })
+      });
+    }
+
+    function assignTicket() {
+      const assignedTo = document.getElementById("assignedTechnician").value;
+
+      if (!assignedTo) {
+        showJSON("ticketOutput", { error: "Please enter a technician user ID." });
+        return;
+      }
+
+      return apiRequest("ticketOutput", "/api/tickets/1/assign", {
+        method: "PUT",
+        body: JSON.stringify({ assigned_to: Number(assignedTo) })
+      });
+    }
 
 
-        const data =
-          await response.json();
+    // =====================================================
+    // TROUBLESHOOTING
+    // =====================================================
 
+    function getTroubleshootingSteps() {
+      const ticketId = document.getElementById("troubleshootingTicketId").value.trim();
 
-        output.textContent =
-          JSON.stringify(
-            data,
-            null,
-            2
-          );
+      if (!ticketId) {
+        showJSON("troubleshootingOutput", { error: "Ticket ID is required." });
+        return;
+      }
 
+      return apiRequest(
+        "troubleshootingOutput",
+        `/api/troubleshooting/ticket/${encodeURIComponent(ticketId)}`
+      );
+    }
 
-      } catch (error) {
+    async function addTroubleshootingStep() {
+      if (!checkToken()) return;
 
-        output.textContent =
-          `Error: ${error.message}`;
+      const ticketId = document.getElementById("troubleshootingTicketId").value.trim();
+      const stepNumber = document.getElementById("troubleshootingStepNumber").value.trim();
+      const description = document.getElementById("troubleshootingDescription").value.trim();
+      const result = document.getElementById("troubleshootingResult").value.trim();
+      const completed =
+        document.getElementById("troubleshootingCompleted").value === "true";
+
+      if (!ticketId || !stepNumber || !description) {
+        showJSON("troubleshootingOutput", {
+          error: "Ticket ID, step number, and description are required."
+        });
+        return;
+      }
+
+      const ok = await apiRequest("troubleshootingOutput", "/api/troubleshooting", {
+        method: "POST",
+        body: JSON.stringify({
+          ticket_id: Number(ticketId),
+          step_number: Number(stepNumber),
+          description,
+          result: result || null,
+          completed
+        })
+      });
+
+      if (ok) {
+        clearFields(["troubleshootingDescription", "troubleshootingResult"]);
       }
     }
 
 
-    // ==========================================
-    // GET ALL TICKETS
-    // ==========================================
+    // =====================================================
+    // REGISTER EMPLOYEE (public, no token needed)
+    // =====================================================
 
-    async function getTickets() {
+    async function registerUser() {
+      const first_name = document.getElementById("registerFirstName").value.trim();
+      const last_name = document.getElementById("registerLastName").value.trim();
+      const email = document.getElementById("registerEmail").value.trim();
+      const password = document.getElementById("registerPassword").value;
+      const department = document.getElementById("registerDepartment").value.trim();
 
-      const output =
-        document.getElementById(
-          "ticketOutput"
-        );
-
-
-      if (!token) {
-
-        output.textContent =
-          "Please login first.";
-
+      if (!first_name || !last_name || !email || !password) {
+        showJSON("registerOutput", {
+          error: "First name, last name, email, and password are required."
+        });
         return;
       }
 
-
       try {
+        const response = await fetch(`${API_URL}/api/auth/register`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            first_name,
+            last_name,
+            email,
+            password,
+            department: department || null
+          })
+        });
 
-        const response =
-          await fetch(
-            `${API_URL}/api/tickets`,
-            {
-              method: "GET",
+        const data = await response.json();
 
-              headers: {
-                "Authorization":
-                  `Bearer ${token}`
-              }
-            }
-          );
+        showJSON("registerOutput", { status: response.status, data });
 
-
-        const data =
-          await response.json();
-
-
-        output.textContent =
-          JSON.stringify(
-            data,
-            null,
-            2
-          );
-
+        if (response.ok) {
+          clearFields([
+            "registerFirstName",
+            "registerLastName",
+            "registerEmail",
+            "registerPassword",
+            "registerDepartment"
+          ]);
+        }
 
       } catch (error) {
-
-        output.textContent =
-          `Error: ${error.message}`;
+        showJSON("registerOutput", { error: error.message });
       }
     }
 
 
-    // ==========================================
-    // UPDATE TICKET
-    // Technician/Admin only
-    // ==========================================
+    // =====================================================
+    // AUDIT LOGS
+    // =====================================================
 
-    async function updateTicket() {
-
-      const output =
-        document.getElementById(
-          "ticketOutput"
-        );
-
-
-      if (!token) {
-
-        output.textContent =
-          "Please login first.";
-
-        return;
-      }
-
-
-      try {
-
-        const response =
-          await fetch(
-            `${API_URL}/api/tickets/1`,
-            {
-              method: "PUT",
-
-              headers: {
-
-                "Content-Type":
-                  "application/json",
-
-                "Authorization":
-                  `Bearer ${token}`
-              },
-
-              body: JSON.stringify({
-
-                status:
-                  "in_progress",
-
-                priority:
-                  "high"
-
-              })
-            }
-          );
-
-
-        const data =
-          await response.json();
-
-
-        output.textContent =
-          JSON.stringify(
-            data,
-            null,
-            2
-          );
-
-
-      } catch (error) {
-
-        output.textContent =
-          `Error: ${error.message}`;
-      }
+    function getAuditLogs() {
+      return apiRequest("auditResult", AUDIT_PATH);
     }
 
+    function getAuditLogById() {
+      return apiRequest("auditResult", `${AUDIT_PATH}/1`);
+    }
 
-    // ==========================================
-    // ASSIGN TICKET
-    // Technician/Admin only
-    // ==========================================
+    async function createAuditLog() {
+      if (!checkToken()) return;
 
-    async function assignTicket() {
+      const action = document.getElementById("auditAction").value.trim();
+      const entity_type = document.getElementById("auditEntityType").value.trim();
+      const entity_id = document.getElementById("auditEntityId").value.trim();
+      const details = document.getElementById("auditDetails").value.trim();
 
-      const output =
-        document.getElementById(
-          "ticketOutput"
-        );
-
-
-      if (!token) {
-
-        output.textContent =
-          "Please login first.";
-
+      if (!action || !entity_type) {
+        showJSON("auditResult", { error: "Action and entity type are required." });
         return;
       }
 
+      const ok = await apiRequest("auditResult", AUDIT_PATH, {
+        method: "POST",
+        body: JSON.stringify({
+          action,
+          entity_type,
+          entity_id: entity_id ? Number(entity_id) : null,
+          details: details || null
+        })
+      });
 
-      try {
-
-        const response =
-          await fetch(
-            `${API_URL}/api/tickets/1/assign`,
-            {
-              method: "PUT",
-
-              headers: {
-
-                "Content-Type":
-                  "application/json",
-
-                "Authorization":
-                  `Bearer ${token}`
-              },
-
-              body: JSON.stringify({
-
-                assigned_to: 4
-
-              })
-            }
-          );
-
-
-        const data =
-          await response.json();
-
-
-        output.textContent =
-          JSON.stringify(
-            data,
-            null,
-            2
-          );
-
-
-      } catch (error) {
-
-        output.textContent =
-          `Error: ${error.message}`;
+      if (ok) {
+        clearFields([
+          "auditAction",
+          "auditEntityType",
+          "auditEntityId",
+          "auditDetails"
+        ]);
       }
     }
 
   </script>
 
 </body>
-
 </html>

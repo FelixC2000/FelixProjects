@@ -5,7 +5,12 @@ const pool = require("../db/database");
 
 const router = express.Router();
 
+// =====================================================
 // REGISTER
+// Public registration can ONLY create employee accounts.
+// Users cannot choose their own role.
+// =====================================================
+
 router.post("/register", async (req, res) => {
   try {
     const {
@@ -13,7 +18,6 @@ router.post("/register", async (req, res) => {
       last_name,
       email,
       password,
-      role,
       department
     } = req.body;
 
@@ -43,8 +47,13 @@ router.post("/register", async (req, res) => {
       });
     }
 
+    // Hash the password before storing it.
     const passwordHash = await bcrypt.hash(password, 12);
 
+    // IMPORTANT:
+    // The role is intentionally NOT taken from req.body.
+    // Every user registered through this public endpoint
+    // is automatically assigned the employee role.
     const result = await pool.query(
       `INSERT INTO users (
         first_name,
@@ -68,7 +77,7 @@ router.post("/register", async (req, res) => {
         last_name,
         email,
         passwordHash,
-        role || "employee",
+        "employee",
         department || null
       ]
     );
@@ -88,7 +97,11 @@ router.post("/register", async (req, res) => {
   }
 });
 
+
+// =====================================================
 // LOGIN
+// =====================================================
+
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -132,6 +145,8 @@ router.post("/login", async (req, res) => {
       });
     }
 
+    // Create JWT containing only the information
+    // needed by the application.
     const token = jwt.sign(
       {
         userId: user.id,
@@ -166,5 +181,6 @@ router.post("/login", async (req, res) => {
     });
   }
 });
+
 
 module.exports = router;

@@ -11,7 +11,7 @@ const commentsRouter = require("./routes/comments");
 const troubleshootingRouter = require("./routes/troubleshooting");
 const historyRouter = require("./routes/history");
 const authRouter = require("./routes/auth");
-
+const auditRouter = require("./routes/audit");
 
 const app = express();
 
@@ -28,6 +28,8 @@ app.use("/api/comments", commentsRouter);
 app.use("/api/troubleshooting", troubleshootingRouter);
 app.use("/api/history", historyRouter);
 app.use("/api/auth", authRouter);
+app.use("/api/audit", auditRouter);
+
 
 app.get("/", (req, res) => {
   res.json({
