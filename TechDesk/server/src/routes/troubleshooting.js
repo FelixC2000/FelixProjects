@@ -8,6 +8,7 @@ const router = express.Router();
 // All troubleshooting routes require authentication
 router.use(authenticateToken);
 
+
 // =====================================================
 // GET TROUBLESHOOTING STEPS FOR A TICKET
 // Authenticated users
@@ -16,6 +17,15 @@ router.use(authenticateToken);
 router.get("/ticket/:ticketId", async (req, res) => {
   try {
     const { ticketId } = req.params;
+
+    // Validate ticket ID
+    const ticketIdNumber = Number(ticketId);
+
+    if (!Number.isInteger(ticketIdNumber) || ticketIdNumber <= 0) {
+      return res.status(400).json({
+        message: "Invalid ticket ID."
+      });
+    }
 
     const result = await pool.query(
       `SELECT
@@ -28,8 +38,8 @@ router.get("/ticket/:ticketId", async (req, res) => {
           created_at
        FROM troubleshooting_steps
        WHERE ticket_id = $1
-       ORDER BY step_number ASC`,
-      [ticketId]
+       ORDER BY step_number ASC, id ASC`,
+      [ticketIdNumber]
     );
 
     res.json(result.rows);
@@ -44,6 +54,7 @@ router.get("/ticket/:ticketId", async (req, res) => {
   }
 });
 
+
 // =====================================================
 // ADD TROUBLESHOOTING STEP
 // Technician/Admin only
@@ -56,15 +67,27 @@ router.post(
     try {
       const {
         ticket_id,
-        step_number,
         description,
         result,
         completed
       } = req.body;
 
-      if (!ticket_id || !step_number || !description) {
+      // Validate ticket ID
+      const ticketIdNumber = Number(ticket_id);
+
+      if (!Number.isInteger(ticketIdNumber) || ticketIdNumber <= 0) {
         return res.status(400).json({
-          message: "Ticket ID, step number, and description are required."
+          message: "A valid ticket ID is required."
+        });
+      }
+
+      // Validate description
+      if (
+        typeof description !== "string" ||
+        description.trim().length === 0
+      ) {
+        return res.status(400).json({
+          message: "Troubleshooting description is required."
         });
       }
 
@@ -73,7 +96,7 @@ router.post(
         `SELECT id
          FROM tickets
          WHERE id = $1`,
-        [ticket_id]
+        [ticketIdNumber]
       );
 
       if (ticketResult.rows.length === 0) {
@@ -82,6 +105,24 @@ router.post(
         });
       }
 
+      // =================================================
+      // AUTOMATIC STEP NUMBER
+      // The backend determines the next step number.
+      // =================================================
+
+      const nextStepResult = await pool.query(
+        `SELECT COALESCE(MAX(step_number), 0) + 1 AS next_step
+         FROM troubleshooting_steps
+         WHERE ticket_id = $1`,
+        [ticketIdNumber]
+      );
+
+      const nextStep = nextStepResult.rows[0].next_step;
+
+      // Normalize completed value
+      const isCompleted = completed === true;
+
+      // Insert troubleshooting step
       const newStep = await pool.query(
         `INSERT INTO troubleshooting_steps (
             ticket_id,
@@ -93,11 +134,11 @@ router.post(
          VALUES ($1, $2, $3, $4, $5)
          RETURNING *`,
         [
-          ticket_id,
-          step_number,
-          description,
-          result || null,
-          completed || false
+          ticketIdNumber,
+          nextStep,
+          description.trim(),
+          result ? String(result).trim() : null,
+          isCompleted
         ]
       );
 
@@ -116,5 +157,6 @@ router.post(
     }
   }
 );
+
 
 module.exports = router;

@@ -2,6 +2,7 @@ const express = require("express");
 const pool = require("../db/database");
 const { authenticateToken } = require("../middleware/authMiddleware");
 const { requireRole } = require("../middleware/roleMiddleware");
+const { createAuditLog } = require("../utils/auditLogger");
 
 const router = express.Router();
 
@@ -213,7 +214,8 @@ router.put(
           await client.query("ROLLBACK");
 
           return res.status(400).json({
-            message: "Tickets can only be assigned to technicians or administrators."
+            message:
+              "Tickets can only be assigned to technicians or administrators."
           });
         }
       }
@@ -291,8 +293,53 @@ router.put(
         );
       }
 
-      // IMPORTANT: commit transaction
+      // Commit transaction
       await client.query("COMMIT");
+
+      // =====================================================
+      // AUTOMATIC AUDIT LOG - UPDATE TICKET
+      // =====================================================
+
+      const changedFields = [];
+
+      if (title !== undefined) {
+        changedFields.push("title");
+      }
+
+      if (description !== undefined) {
+        changedFields.push("description");
+      }
+
+      if (priority !== undefined) {
+        changedFields.push("priority");
+      }
+
+      if (status !== undefined) {
+        changedFields.push("status");
+      }
+
+      if (category !== undefined) {
+        changedFields.push("category");
+      }
+
+      if (assigned_to !== undefined) {
+        changedFields.push("assigned_to");
+      }
+
+      if (asset_id !== undefined) {
+        changedFields.push("asset_id");
+      }
+
+      await createAuditLog({
+        userId: req.user.userId,
+        action: "UPDATE_TICKET",
+        entityType: "ticket",
+        entityId: Number(id),
+        details:
+          changedFields.length > 0
+            ? `Ticket #${id} updated. Fields changed: ${changedFields.join(", ")}`
+            : `Ticket #${id} update request completed`
+      });
 
       res.json({
         message: "Ticket updated successfully.",
@@ -391,7 +438,8 @@ router.put(
         await client.query("ROLLBACK");
 
         return res.status(400).json({
-          message: "Tickets can only be assigned to technicians or administrators."
+          message:
+            "Tickets can only be assigned to technicians or administrators."
         });
       }
 
@@ -428,6 +476,18 @@ router.put(
       );
 
       await client.query("COMMIT");
+
+      // =====================================================
+      // AUTOMATIC AUDIT LOG - ASSIGN TICKET
+      // =====================================================
+
+      await createAuditLog({
+        userId: req.user.userId,
+        action: "ASSIGN_TICKET",
+        entityType: "ticket",
+        entityId: Number(id),
+        details: `Ticket #${id} assigned to user #${assigned_to}`
+      });
 
       res.json({
         message: "Ticket assigned successfully.",
@@ -541,6 +601,18 @@ router.post("/", async (req, res) => {
         asset_id || null
       ]
     );
+
+    // =====================================================
+    // AUTOMATIC AUDIT LOG
+    // =====================================================
+
+    await createAuditLog({
+      userId: req.user.userId,
+      action: "CREATE_TICKET",
+      entityType: "ticket",
+      entityId: result.rows[0].id,
+      details: `Ticket "${result.rows[0].title}" created`
+    });
 
     res.status(201).json({
       message: "Support ticket created successfully.",
