@@ -1,118 +1,227 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+  <meta name="theme-color" content="#0f172a" />
   <title>TechDesk API Tester</title>
 
   <style>
+    :root {
+      --bg: #f1f5f9;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --success: #15803d;
+      --danger: #b91c1c;
+      --warning: #b45309;
+      --code: #0b1220;
+    }
+
     * {
       box-sizing: border-box;
     }
 
     body {
-      font-family: Arial, Helvetica, sans-serif;
       margin: 0;
-      background: #f3f4f6;
-      color: #1f2937;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      line-height: 1.5;
     }
 
     header {
-      background: #111827;
+      background: #0f172a;
       color: white;
-      padding: 25px;
-      text-align: center;
+      padding: 25px 20px;
+    }
+
+    .header-content,
+    main {
+      width: min(1200px, 94%);
+      margin: auto;
     }
 
     header h1 {
-      margin: 0 0 8px;
-      font-size: 30px;
+      margin: 0;
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
     }
 
     header p {
-      margin: 0;
-      color: #d1d5db;
+      margin: 7px 0 0;
+      color: #cbd5e1;
     }
 
     main {
-      max-width: 1100px;
-      margin: 30px auto;
-      padding: 0 20px 50px;
-    }
-
-    section {
-      background: white;
-      border-radius: 10px;
-      padding: 24px;
-      margin-bottom: 24px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      padding: 24px 0 50px;
     }
 
     h2 {
       margin-top: 0;
-      color: #111827;
-      border-bottom: 1px solid #e5e7eb;
-      padding-bottom: 10px;
+      font-size: 1.2rem;
     }
 
     h3 {
-      color: #374151;
-      margin-top: 25px;
+      font-size: 1rem;
+      margin-top: 0;
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 18px;
+      box-shadow: 0 3px 10px rgb(15 23 42 / 4%);
+      min-width: 0;
+    }
+
+    .stat {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .stat strong {
+      display: block;
+      margin-top: 5px;
+      font-size: 1.15rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 20px;
+      padding: 5px 10px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      background: #e2e8f0;
+      color: #334155;
+    }
+
+    .badge.online {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .badge.offline {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .badge.pending {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .section-heading {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 15px;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
     }
 
     label {
-      display: block;
-      font-weight: bold;
-      margin-top: 12px;
-      margin-bottom: 6px;
+      font-size: 0.88rem;
+      font-weight: 650;
     }
 
     input,
     select,
     textarea {
       width: 100%;
-      padding: 10px;
-      border: 1px solid #d1d5db;
-      border-radius: 6px;
-      font-size: 14px;
+      min-width: 0;
+      padding: 10px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 7px;
       background: white;
+      color: var(--text);
+      font: inherit;
     }
 
     textarea {
-      min-height: 100px;
+      min-height: 90px;
       resize: vertical;
     }
 
     input:focus,
     select:focus,
     textarea:focus {
-      outline: none;
-      border-color: #2563eb;
-      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+      outline: 2px solid #bfdbfe;
+      border-color: var(--primary);
     }
 
     button {
-      background: #2563eb;
-      color: white;
+      padding: 10px 14px;
       border: none;
-      border-radius: 6px;
-      padding: 10px 16px;
-      margin: 8px 6px 8px 0;
+      border-radius: 7px;
+      background: var(--primary);
+      color: white;
       cursor: pointer;
-      font-weight: bold;
+      font-weight: 650;
+      font: inherit;
+      font-size: 0.9rem;
+      transition: background 0.15s;
     }
 
     button:hover {
-      background: #1d4ed8;
+      background: var(--primary-hover);
+    }
+
+    button:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
     }
 
     button.secondary {
-      background: #6b7280;
+      background: #e2e8f0;
+      color: #0f172a;
     }
 
     button.secondary:hover {
-      background: #4b5563;
+      background: #cbd5e1;
     }
 
     button.danger {
@@ -123,2923 +232,971 @@
       background: #b91c1c;
     }
 
-    button.success {
-      background: #16a34a;
-    }
-
-    button.success:hover {
-      background: #15803d;
-    }
-
-    button.warning-button {
-      background: #d97706;
-    }
-
-    button.warning-button:hover {
-      background: #b45309;
-    }
-
-    .button-group {
-      margin-top: 15px;
-    }
-
-    pre {
-      background: #111827;
-      color: #e5e7eb;
-      padding: 15px;
-      border-radius: 6px;
-      overflow-x: auto;
-      white-space: pre-wrap;
-      word-wrap: break-word;
-      min-height: 50px;
-    }
-
-    .token-container {
+    .actions {
       display: flex;
+      flex-wrap: wrap;
       gap: 8px;
-      align-items: center;
+      margin-top: 14px;
     }
 
-    .token-container input {
-      flex: 1;
+    .output {
+      background: var(--code);
+      color: #d1fae5;
+      border-radius: 8px;
+      padding: 16px;
+      min-height: 120px;
+      max-height: 420px;
+      overflow: auto;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 0.84rem;
     }
 
-    .warning {
-      background: #fef3c7;
-      color: #92400e;
-      border: 1px solid #f59e0b;
+    .token {
+      word-break: break-all;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 0.8rem;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
       padding: 12px;
-      border-radius: 6px;
-      margin-top: 12px;
+      max-height: 100px;
+      overflow: auto;
     }
 
-    .info {
+    .notice {
+      border-radius: 8px;
+      padding: 12px 14px;
       background: #eff6ff;
       color: #1e40af;
-      border: 1px solid #93c5fd;
-      padding: 12px;
-      border-radius: 6px;
-      margin-top: 12px;
-    }
-
-    .success-message {
-      background: #ecfdf5;
-      color: #166534;
-      border: 1px solid #86efac;
-      padding: 12px;
-      border-radius: 6px;
-      margin-top: 12px;
-    }
-
-    .security-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 15px;
-      margin-top: 20px;
-    }
-
-    .security-card {
-      border: 1px solid #e5e7eb;
-      border-radius: 8px;
-      padding: 18px;
-      background: #fafafa;
-    }
-
-    .security-card h3 {
-      margin-top: 0;
-      font-size: 18px;
-    }
-
-    .security-card p {
-      font-size: 14px;
-      color: #6b7280;
-      min-height: 40px;
-    }
-
-    .test-result {
-      margin-top: 20px;
-      padding: 18px;
-      border-radius: 8px;
-      border: 2px solid #d1d5db;
-      background: #f9fafb;
-    }
-
-    .test-result.pass {
-      border-color: #22c55e;
-      background: #f0fdf4;
-    }
-
-    .test-result.fail {
-      border-color: #ef4444;
-      background: #fef2f2;
-    }
-
-    .test-result.running {
-      border-color: #f59e0b;
-      background: #fffbeb;
-    }
-
-    .test-result.info-result {
-      border-color: #3b82f6;
-      background: #eff6ff;
-    }
-
-    .result-title {
-      font-size: 20px;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .pass-text {
-      color: #15803d;
-      font-weight: bold;
-    }
-
-    .fail-text {
-      color: #b91c1c;
-      font-weight: bold;
-    }
-
-    .running-text {
-      color: #b45309;
-      font-weight: bold;
-    }
-
-    .info-text {
-      color: #1d4ed8;
-      font-weight: bold;
-    }
-
-    .status-box {
-      display: inline-block;
-      padding: 4px 9px;
-      border-radius: 5px;
-      font-weight: bold;
-      margin-left: 5px;
-    }
-
-    .status-200 {
-      background: #dcfce7;
-      color: #166534;
-    }
-
-    .status-201 {
-      background: #dcfce7;
-      color: #166534;
-    }
-
-    .status-400 {
-      background: #fef3c7;
-      color: #92400e;
-    }
-
-    .status-401 {
-      background: #fee2e2;
-      color: #991b1b;
-    }
-
-    .status-403 {
-      background: #fee2e2;
-      color: #991b1b;
-    }
-
-    .status-404 {
-      background: #fef3c7;
-      color: #92400e;
-    }
-
-    .status-409 {
-      background: #fef3c7;
-      color: #92400e;
-    }
-
-    .status-500 {
-      background: #fee2e2;
-      color: #991b1b;
-    }
-
-    .status-other {
-      background: #e5e7eb;
-      color: #374151;
-    }
-
-    .small-text {
-      font-size: 13px;
-      color: #6b7280;
-    }
-
-    .logged-user {
-      padding: 10px;
-      background: #ecfdf5;
-      border: 1px solid #86efac;
-      color: #166534;
-      border-radius: 6px;
-      margin-top: 10px;
-      font-weight: bold;
-    }
-
-    .section-description {
-      color: #6b7280;
-      margin-top: -5px;
+      font-size: 0.9rem;
       margin-bottom: 15px;
     }
 
-    .field-note {
-      font-size: 13px;
-      color: #6b7280;
-      margin-top: 4px;
+    .notice.warning {
+      background: #fffbeb;
+      color: #92400e;
     }
 
-    .divider {
-      border: none;
-      border-top: 1px solid #e5e7eb;
-      margin: 25px 0;
+    .endpoint {
+      display: inline-block;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 0.8rem;
+      background: #f1f5f9;
+      padding: 3px 7px;
+      border-radius: 5px;
+      overflow-wrap: anywhere;
     }
 
-    .dashboard {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 12px;
-      margin-top: 20px;
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      padding: 20px;
     }
 
-    .dashboard-card {
-      padding: 15px;
-      border-radius: 8px;
-      border: 1px solid #e5e7eb;
-      background: #fafafa;
-    }
-
-    .dashboard-card strong {
-      display: block;
-      margin-bottom: 5px;
-    }
-
-    .status-online {
-      color: #15803d;
-      font-weight: bold;
-    }
-
-    .status-active {
-      color: #1d4ed8;
-      font-weight: bold;
-    }
-
-    @media (max-width: 700px) {
-      main {
-        padding: 0 10px 30px;
+    @media (max-width: 600px) {
+      .form-grid {
+        grid-template-columns: 1fr;
       }
 
-      section {
-        padding: 18px;
+      .field.full {
+        grid-column: auto;
       }
 
-      .token-container {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .token-container button {
-        width: 100%;
+      .card {
+        padding: 15px;
       }
     }
   </style>
 </head>
 
 <body>
-
   <header>
-    <h1>TechDesk API Tester</h1>
-    <p>Browser-based testing interface for the TechDesk backend.</p>
+    <div class="header-content">
+      <h1>TechDesk API Tester</h1>
+      <p>API testing dashboard · Authentication · Tickets · Security · Audit</p>
+    </div>
   </header>
 
   <main>
-
-    <!-- =====================================================
-         SYSTEM STATUS
-         ===================================================== -->
-
-    <section>
-      <h2>System Status</h2>
-
-      <div class="dashboard">
-
-        <div class="dashboard-card">
-          <strong>Backend</strong>
-          <span class="status-online">● ONLINE</span>
+    <!-- STATUS DASHBOARD -->
+    <section class="grid" aria-label="System status">
+      <article class="card">
+        <div class="stat">
+          <div>
+            <span class="muted">Backend status</span>
+            <strong id="backendStatus">Checking...</strong>
+          </div>
+          <span class="badge pending" id="backendBadge">Checking</span>
         </div>
+        <p class="muted">Checks the deployed API automatically.</p>
+        <button class="secondary" id="checkBackendBtn" onclick="checkBackendStatus()">
+          Check connection
+        </button>
+      </article>
 
-        <div class="dashboard-card">
-          <strong>API Authentication</strong>
-          <span class="status-active">JWT ACTIVE</span>
+      <article class="card">
+        <div class="stat">
+          <div>
+            <span class="muted">Authentication</span>
+            <strong id="authStatus">Not authenticated</strong>
+          </div>
+          <span class="badge" id="authBadge">JWT</span>
         </div>
+        <p class="muted">Bearer token authentication.</p>
+      </article>
 
-        <div class="dashboard-card">
-          <strong>Authorization</strong>
-          <span class="status-active">RBAC ACTIVE</span>
+      <article class="card">
+        <div class="stat">
+          <div>
+            <span class="muted">API environment</span>
+            <strong>Railway</strong>
+          </div>
+          <span class="badge online">Configured</span>
         </div>
+        <p class="muted">The tester uses the deployed backend URL.</p>
+      </article>
 
-        <div class="dashboard-card">
-          <strong>Input Validation</strong>
-          <span class="status-active">ACTIVE</span>
+      <article class="card">
+        <div class="stat">
+          <div>
+            <span class="muted">API response</span>
+            <strong id="lastResponse">No requests yet</strong>
+          </div>
         </div>
-
-        <div class="dashboard-card">
-          <strong>Audit Logging</strong>
-          <span class="status-active">ACTIVE</span>
-        </div>
-
-      </div>
+        <p class="muted">Status of the most recent API request.</p>
+      </article>
     </section>
 
-
-    <!-- =====================================================
-         LOGIN
-         ===================================================== -->
-
-    <section>
-      <h2>1. Login</h2>
-
-      <label for="loginEmail">Email</label>
-
-      <input
-        type="email"
-        id="loginEmail"
-        value="admin.test@example.com"
-        placeholder="Enter email"
-      />
-
-      <label for="loginPassword">Password</label>
-
-      <input
-        type="password"
-        id="loginPassword"
-        placeholder="Enter password"
-      />
-
-      <div class="button-group">
-        <button onclick="login()">Login</button>
-        <button class="danger" onclick="logout()">Logout</button>
-      </div>
-
-      <div id="loginOutput"></div>
-    </section>
-
-
-    <!-- =====================================================
-         AUTH TOKEN
-         ===================================================== -->
-
-    <section>
-      <h2>2. Authentication Token</h2>
-
-      <div class="token-container">
-
+    <!-- API CONFIGURATION -->
+    <section class="card">
+      <h2>API Configuration</h2>
+      <div class="field">
+        <label for="apiUrl">Backend base URL</label>
         <input
-          type="password"
-          id="tokenOutput"
-          readonly
-          placeholder="No authentication token"
+          id="apiUrl"
+          type="url"
+          value="https://techdesk-production.up.railway.app"
+          spellcheck="false"
         />
-
-        <button onclick="toggleTokenVisibility()">
-          Show / Hide
-        </button>
-
-        <button onclick="copyToken()" class="secondary">
-          Copy
-        </button>
-
-        <button onclick="clearToken()" class="danger">
-          Clear
-        </button>
-
       </div>
-
-      <div class="warning">
-        <strong>Security:</strong>
-        Never share your JWT token publicly or commit it to GitHub.
+      <div class="actions">
+        <button onclick="saveApiUrl()">Apply URL</button>
+        <button class="secondary" onclick="resetApiUrl()">Reset to Railway URL</button>
       </div>
-
-      <div id="sessionStatus"></div>
+      <p class="muted">
+        Use your backend's base URL without adding an endpoint such as
+        <code>/api/test-db</code>.
+      </p>
     </section>
 
-
-    <!-- =====================================================
-         PROFILE
-         ===================================================== -->
-
-    <section>
-      <h2>3. My Profile</h2>
-
-      <p class="section-description">
-        Verify that the current JWT token is valid and identify the
-        authenticated user's role.
+    <!-- AUTHENTICATION -->
+    <section class="card">
+      <h2>1. Authentication</h2>
+      <p class="muted">
+        Log in with an account that already exists in your TechDesk database.
       </p>
 
-      <button onclick="testAuth()">Test Authentication</button>
+      <form id="loginForm">
+        <div class="form-grid">
+          <div class="field">
+            <label for="loginEmail">Email</label>
+            <input
+              id="loginEmail"
+              type="email"
+              placeholder="technician@example.com"
+              autocomplete="username"
+              required
+            />
+          </div>
 
-      <pre id="profileOutput">No request made yet.</pre>
-    </section>
+          <div class="field">
+            <label for="loginPassword">Password</label>
+            <input
+              id="loginPassword"
+              type="password"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+              required
+            />
+          </div>
+        </div>
 
-
-    <!-- =====================================================
-         TICKETS
-         ===================================================== -->
-
-    <section>
-      <h2>4. Ticket Management</h2>
-
-      <p class="section-description">
-        Create, view, update, and assign support tickets.
-      </p>
-
-      <div class="button-group">
-        <button onclick="getTickets()">Get All Tickets</button>
-
-        <button onclick="getTicket()">View Ticket #1</button>
-
-        <button onclick="getTicketHistory()">
-          View Ticket #1 History
-        </button>
-      </div>
-
-      <pre id="ticketOutput">No request made yet.</pre>
-
-
-      <!-- CREATE TICKET -->
-
-      <h3>Create Ticket</h3>
-
-      <label for="createTitle">Title</label>
-
-      <input
-        type="text"
-        id="createTitle"
-        maxlength="255"
-        placeholder="Example: Laptop cannot connect to Wi-Fi"
-      />
-
-      <label for="createDescription">Description</label>
-
-      <textarea
-        id="createDescription"
-        placeholder="Describe the problem..."
-      ></textarea>
-
-      <label for="createPriority">Priority</label>
-
-      <select id="createPriority">
-        <option value="low">Low</option>
-        <option value="medium" selected>Medium</option>
-        <option value="high">High</option>
-        <option value="critical">Critical</option>
-      </select>
-
-      <label for="createStatus">Status</label>
-
-      <select id="createStatus">
-        <option value="open" selected>Open</option>
-        <option value="in_progress">In Progress</option>
-        <option value="pending">Pending</option>
-        <option value="resolved">Resolved</option>
-        <option value="closed">Closed</option>
-      </select>
-
-      <label for="createCategory">Category</label>
-
-      <select id="createCategory">
-        <option value="hardware">Hardware</option>
-        <option value="software">Software</option>
-        <option value="network" selected>Network</option>
-        <option value="account">Account</option>
-        <option value="security">Security</option>
-        <option value="other">Other</option>
-      </select>
-
-      <label for="createAssetId">Asset ID (optional)</label>
-
-      <input
-        type="number"
-        id="createAssetId"
-        min="1"
-        placeholder="Example: 1"
-      />
-
-      <div class="button-group">
-        <button onclick="createTicket()">
-          Create Ticket
-        </button>
-      </div>
-
-      <pre id="createTicketOutput">No request made yet.</pre>
-
-
-      <hr class="divider">
-
-
-      <!-- UPDATE TICKET -->
-
-      <h3>Update Ticket #1</h3>
-
-      <label for="updatePriority">Priority</label>
-
-      <select id="updatePriority">
-        <option value="">Do not change</option>
-        <option value="low">Low</option>
-        <option value="medium">Medium</option>
-        <option value="high">High</option>
-        <option value="critical">Critical</option>
-      </select>
-
-      <label for="updateStatus">Status</label>
-
-      <select id="updateStatus">
-        <option value="">Do not change</option>
-        <option value="open">Open</option>
-        <option value="in_progress">In Progress</option>
-        <option value="pending">Pending</option>
-        <option value="resolved">Resolved</option>
-        <option value="closed">Closed</option>
-      </select>
-
-      <label for="updateCategory">Category</label>
-
-      <select id="updateCategory">
-        <option value="">Do not change</option>
-        <option value="hardware">Hardware</option>
-        <option value="software">Software</option>
-        <option value="network">Network</option>
-        <option value="account">Account</option>
-        <option value="security">Security</option>
-        <option value="other">Other</option>
-      </select>
-
-      <label for="updateAssignedTo">
-        Assigned Technician ID (optional)
-      </label>
-
-      <input
-        type="number"
-        id="updateAssignedTo"
-        min="1"
-        placeholder="Example: 4"
-      />
-
-      <div class="button-group">
-        <button onclick="updateTicket()">
-          Update Ticket #1
-        </button>
-      </div>
-
-      <pre id="updateTicketOutput">No request made yet.</pre>
-
-
-      <hr class="divider">
-
-
-      <!-- ASSIGN TICKET -->
-
-      <h3>Assign Ticket #1</h3>
-
-      <label for="assignUserId">
-        Technician/Admin User ID
-      </label>
-
-      <input
-        type="number"
-        id="assignUserId"
-        min="1"
-        placeholder="Example: 4"
-      />
-
-      <div class="button-group">
-        <button onclick="assignTicket()">
-          Assign Ticket #1
-        </button>
-      </div>
-
-      <pre id="assignOutput">No request made yet.</pre>
-
-    </section>
-
-
-    <!-- =====================================================
-         SECURITY TESTS
-         ===================================================== -->
-
-    <section>
-      <h2>5. Security & Validation Tests</h2>
-
-      <div class="info">
-        <strong>Purpose:</strong>
-        These tests intentionally send invalid or unauthorized
-        requests to verify that the TechDesk backend protects
-        the API correctly.
-      </div>
-
-      <div class="security-grid">
-
-        <!-- INVALID STATUS -->
-
-        <div class="security-card">
-
-          <h3>Invalid Status</h3>
-
-          <p>
-            Sends an invalid status value and expects HTTP 400.
-          </p>
-
-          <button onclick="testInvalidStatus()">
-            Test Invalid Status
+        <div class="actions">
+          <button type="submit">Log in</button>
+          <button class="secondary" type="button" onclick="getCurrentUser()">
+            Get current user
           </button>
-
-        </div>
-
-
-        <!-- INVALID PRIORITY -->
-
-        <div class="security-card">
-
-          <h3>Invalid Priority</h3>
-
-          <p>
-            Sends an invalid priority value and expects HTTP 400.
-          </p>
-
-          <button onclick="testInvalidPriority()">
-            Test Invalid Priority
+          <button class="secondary" type="button" onclick="copyToken()">
+            Copy token
           </button>
-
-        </div>
-
-
-        <!-- INVALID CATEGORY -->
-
-        <div class="security-card">
-
-          <h3>Invalid Category</h3>
-
-          <p>
-            Sends an invalid category value and expects HTTP 400.
-          </p>
-
-          <button onclick="testInvalidCategory()">
-            Test Invalid Category
+          <button class="danger" type="button" onclick="logout()">
+            Log out
           </button>
-
         </div>
+      </form>
 
-
-        <!-- EMPLOYEE PERMISSIONS -->
-
-        <div class="security-card">
-
-          <h3>Employee Permissions</h3>
-
-          <p>
-            Verifies that an employee cannot update a ticket.
-            This test requires an employee JWT session.
-          </p>
-
-          <button
-            class="warning-button"
-            onclick="testEmployeePermissions()"
-          >
-            Test Employee Permissions
-          </button>
-
-        </div>
-
+      <h3 style="margin-top: 20px;">JWT access token</h3>
+      <div id="tokenDisplay" class="token">No token stored.</div>
+      <div class="actions">
+        <button class="secondary" onclick="clearToken()">Clear token</button>
       </div>
-
-
-      <div id="securityResult" class="test-result">
-
-        <div class="result-title">
-          Security Test Results
-        </div>
-
-        <p>
-          No security test has been executed yet.
-        </p>
-
-      </div>
-
-      <pre id="securityOutput">
-No security test request made yet.
-      </pre>
-
     </section>
 
-
-    <!-- =====================================================
-         TROUBLESHOOTING
-         ===================================================== -->
-
-    <section>
-      <h2>6. Troubleshooting</h2>
-
-      <p class="section-description">
-        Record the troubleshooting actions performed by a
-        technician and their results.
+    <!-- TICKETS -->
+    <section class="card">
+      <h2>2. Ticket Management</h2>
+      <p class="muted">
+        Endpoints: <span class="endpoint">GET /api/tickets</span>
+        <span class="endpoint">POST /api/tickets</span>
       </p>
 
-      <button onclick="getTroubleshooting()">
-        Get Ticket #1 Troubleshooting
-      </button>
-
-      <pre id="troubleshootingOutput">
-No request made yet.
-      </pre>
-
-
-      <h3>Add Troubleshooting Step</h3>
-
-      <label for="troubleshootingTicketId">
-        Ticket ID
-      </label>
-
-      <input
-        type="number"
-        id="troubleshootingTicketId"
-        value="1"
-        min="1"
-      />
-
-
-      <label for="troubleshootingDescription">
-        Description
-      </label>
-
-      <textarea
-        id="troubleshootingDescription"
-        placeholder="Example: Checked the Wi-Fi adapter and restarted the network connection."
-      ></textarea>
-
-      <div class="field-note">
-        Describe the troubleshooting action performed by the technician.
+      <div class="actions">
+        <button onclick="getTickets()">Get all tickets</button>
+        <button class="secondary" onclick="getTicketById()">Get ticket by ID</button>
       </div>
 
-
-      <label for="troubleshootingResult">
-        Result
-      </label>
-
-      <textarea
-        id="troubleshootingResult"
-        placeholder="Example: Network connectivity was successfully restored."
-      ></textarea>
-
-      <div class="field-note">
-        Describe what happened after performing the troubleshooting action.
+      <div class="field" style="margin-top: 15px;">
+        <label for="ticketId">Ticket ID</label>
+        <input id="ticketId" type="number" min="1" value="1" />
       </div>
 
+      <h3 style="margin-top: 24px;">Create a ticket</h3>
 
-      <label for="troubleshootingCompleted">
-        Completed
-      </label>
+      <form id="createTicketForm">
+        <div class="form-grid">
+          <div class="field">
+            <label for="ticketTitle">Title</label>
+            <input id="ticketTitle" required placeholder="Laptop cannot connect to Wi-Fi" />
+          </div>
 
-      <select id="troubleshootingCompleted">
+          <div class="field">
+            <label for="ticketCategory">Category</label>
+            <select id="ticketCategory">
+              <option value="hardware">Hardware</option>
+              <option value="software">Software</option>
+              <option value="network">Network</option>
+              <option value="account">Account</option>
+              <option value="security">Security</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
 
-        <option value="true" selected>
-          Yes
-        </option>
+          <div class="field">
+            <label for="ticketPriority">Priority</label>
+            <select id="ticketPriority">
+              <option value="low">Low</option>
+              <option value="medium" selected>Medium</option>
+              <option value="high">High</option>
+              <option value="critical">Critical</option>
+            </select>
+          </div>
 
-        <option value="false">
-          No
-        </option>
+          <div class="field">
+            <label for="ticketStatus">Status</label>
+            <select id="ticketStatus">
+              <option value="open" selected>Open</option>
+              <option value="in_progress">In progress</option>
+              <option value="pending">Pending</option>
+              <option value="resolved">Resolved</option>
+              <option value="closed">Closed</option>
+            </select>
+          </div>
 
-      </select>
+          <div class="field full">
+            <label for="ticketDescription">Description</label>
+            <textarea
+              id="ticketDescription"
+              required
+              placeholder="Describe the issue and any troubleshooting already performed."
+            ></textarea>
+          </div>
+        </div>
 
+        <div class="actions">
+          <button type="submit">Create ticket</button>
+        </div>
+      </form>
 
-      <div class="info">
+      <h3 style="margin-top: 25px;">Update ticket</h3>
+      <div class="form-grid">
+        <div class="field">
+          <label for="updateStatus">New status</label>
+          <select id="updateStatus">
+            <option value="open">Open</option>
+            <option value="in_progress">In progress</option>
+            <option value="pending">Pending</option>
+            <option value="resolved">Resolved</option>
+            <option value="closed">Closed</option>
+          </select>
+        </div>
 
-        <strong>Automatic Step Numbering:</strong>
-
-        The backend automatically calculates the next
-        troubleshooting step number for the ticket.
-
-        You do not need to enter a step number manually.
-
+        <div class="field">
+          <label for="updatePriority">New priority</label>
+          <select id="updatePriority">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+            <option value="critical">Critical</option>
+          </select>
+        </div>
       </div>
 
-
-      <div class="button-group">
-
-        <button onclick="addTroubleshooting()">
-          Add Troubleshooting
-        </button>
-
+      <div class="actions">
+        <button onclick="updateTicket()">Update ticket</button>
+        <button class="secondary" onclick="getTicketHistory()">Get ticket history</button>
       </div>
 
+      <h3 style="margin-top: 25px;">Assign ticket</h3>
+      <div class="field">
+        <label for="assigneeId">Assignee user ID</label>
+        <input id="assigneeId" type="number" min="1" placeholder="Enter a user ID" />
+      </div>
+      <div class="actions">
+        <button onclick="assignTicket()">Assign ticket</button>
+      </div>
+      <p class="muted">
+        Update and assignment payloads depend on the routes implemented by your backend.
+        If a request returns 404 or 400, check the response below for details.
+      </p>
     </section>
 
-
-    <!-- =====================================================
-         REGISTRATION
-         ===================================================== -->
-
-    <section>
-      <h2>7. Register User</h2>
-
-      <p class="section-description">
-        Public registration creates an employee account.
+    <!-- SECURITY TESTING -->
+    <section class="card">
+      <h2>3. Security and Validation Tests</h2>
+      <p class="muted">
+        Use these tests to check authentication, role permissions, and server-side
+        validation. Run them only against your own development project.
       </p>
 
-      <label for="registerFirstName">
-        First Name
-      </label>
-
-      <input
-        type="text"
-        id="registerFirstName"
-        placeholder="First name"
-      />
-
-
-      <label for="registerLastName">
-        Last Name
-      </label>
-
-      <input
-        type="text"
-        id="registerLastName"
-        placeholder="Last name"
-      />
-
-
-      <label for="registerEmail">
-        Email
-      </label>
-
-      <input
-        type="email"
-        id="registerEmail"
-        placeholder="email@example.com"
-      />
-
-
-      <label for="registerPassword">
-        Password
-      </label>
-
-      <input
-        type="password"
-        id="registerPassword"
-        placeholder="Password"
-      />
-
-
-      <div class="info">
-
-        Public registration creates an
-        <strong>employee</strong> account.
-
-        Users cannot self-register as technician or admin.
-
+      <div class="actions">
+        <button onclick="testUnauthorized()">Test without JWT</button>
+        <button onclick="testInvalidStatus()">Test invalid status</button>
+        <button onclick="testInvalidPriority()">Test invalid priority</button>
+        <button onclick="testInvalidCategory()">Test invalid category</button>
       </div>
 
-
-      <div class="button-group">
-
-        <button onclick="registerUser()">
-          Register
-        </button>
-
-      </div>
-
-      <pre id="registerOutput">
-No request made yet.
-      </pre>
-
+      <p class="muted">
+        A successful security test may mean the API correctly rejects an invalid
+        or unauthorized request. Review the HTTP status and response body.
+      </p>
     </section>
 
-
-    <!-- =====================================================
-         AUDIT LOGS
-         ===================================================== -->
-
-    <section>
-      <h2>8. Audit Logs</h2>
-
-      <p class="section-description">
-        View and create audit records associated with system
-        actions and entities.
+    <!-- TROUBLESHOOTING -->
+    <section class="card">
+      <h2>4. Troubleshooting</h2>
+      <p class="muted">
+        Endpoints: <span class="endpoint">GET /api/troubleshooting</span>
+        <span class="endpoint">POST /api/troubleshooting</span>
       </p>
 
-      <div class="button-group">
-
-        <button onclick="getAuditLogs()">
-          Get Audit Logs
-        </button>
-
-        <button onclick="getAuditLog()">
-          Get Audit Log #1
-        </button>
-
+      <div class="actions">
+        <button onclick="getTroubleshooting()">Get troubleshooting guides</button>
       </div>
 
-      <pre id="auditOutput">
-No request made yet.
-      </pre>
-
-
-      <h3>Create Audit Log</h3>
-
-      <label for="auditAction">
-        Action
-      </label>
-
-      <input
-        type="text"
-        id="auditAction"
-        placeholder="Example: TEST_ACTION"
-      />
-
-
-      <label for="auditEntityType">
-        Entity Type
-      </label>
-
-      <input
-        type="text"
-        id="auditEntityType"
-        value="ticket"
-      />
-
-
-      <label for="auditEntityId">
-        Entity ID
-      </label>
-
-      <input
-        type="number"
-        id="auditEntityId"
-        value="1"
-        min="1"
-      />
-
-
-      <label for="auditDetails">
-        Details
-      </label>
-
-      <textarea
-        id="auditDetails"
-        placeholder="Describe the audit event..."
-      ></textarea>
-
-
-      <div class="button-group">
-
-        <button onclick="createAuditLog()">
-          Create Audit Log
-        </button>
-
-      </div>
-
+      <form id="troubleshootingForm" style="margin-top: 20px;">
+        <div class="form-grid">
+          <div class="field">
+            <label for="guideTitle">Guide title</label>
+            <input id="guideTitle" required placeholder="Wi-Fi connection troubleshooting" />
+          </div>
+          <div class="field">
+            <label for="guideCategory">Category</label>
+            <select id="guideCategory">
+              <option value="hardware">Hardware</option>
+              <option value="software">Software</option>
+              <option value="network">Network</option>
+              <option value="account">Account</option>
+              <option value="security">Security</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="field full">
+            <label for="guideContent">Instructions</label>
+            <textarea id="guideContent" required placeholder="Step-by-step troubleshooting instructions"></textarea>
+          </div>
+        </div>
+        <div class="actions">
+          <button type="submit">Create troubleshooting guide</button>
+        </div>
+      </form>
     </section>
 
+    <!-- AUDIT LOG -->
+    <section class="card">
+      <h2>5. Audit Logs</h2>
+      <p class="muted">
+        Endpoints: <span class="endpoint">GET /api/audit</span>
+        <span class="endpoint">GET /api/audit/:id</span>
+      </p>
+
+      <div class="actions">
+        <button onclick="getAuditLogs()">Get audit logs</button>
+        <button class="secondary" onclick="getAuditLogById()">Get audit log by ID</button>
+        <button class="secondary" onclick="createAuditLog()">Test audit log POST</button>
+      </div>
+
+      <p class="muted">
+        The POST audit test sends a sample payload. If your backend records audit
+        events automatically, that is usually preferable to allowing users to create
+        arbitrary audit entries.
+      </p>
+    </section>
+
+    <!-- REGISTER -->
+    <section class="card">
+      <h2>6. User Registration</h2>
+      <p class="muted">
+        Endpoint: <span class="endpoint">POST /api/auth/register</span>
+      </p>
+
+      <form id="registerForm">
+        <div class="form-grid">
+          <div class="field">
+            <label for="registerName">Full name</label>
+            <input id="registerName" required placeholder="Test User" />
+          </div>
+
+          <div class="field">
+            <label for="registerEmail">Email</label>
+            <input id="registerEmail" type="email" required placeholder="newuser@example.com" />
+          </div>
+
+          <div class="field">
+            <label for="registerPassword">Password</label>
+            <input id="registerPassword" type="password" minlength="8" required autocomplete="new-password" />
+          </div>
+
+          <div class="field">
+            <label for="registerRole">Role</label>
+            <select id="registerRole">
+              <option value="employee">Employee</option>
+              <option value="technician">Technician</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="notice warning" style="margin-top: 15px;">
+          Only test role assignment in a controlled environment. A secure backend
+          should prevent users from granting themselves privileged roles.
+        </div>
+
+        <div class="actions">
+          <button type="submit">Register user</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- RESPONSE CONSOLE -->
+    <section class="card">
+      <div class="section-heading">
+        <h2>API Response Console</h2>
+        <div class="actions" style="margin-top: 0;">
+          <button class="secondary" onclick="copyOutput()">Copy response</button>
+          <button class="secondary" onclick="clearOutput()">Clear console</button>
+        </div>
+      </div>
+
+      <div id="output" class="output" role="status" aria-live="polite">TechDesk API Tester ready.
+Click "Check connection" to test your deployed backend.</div>
+    </section>
   </main>
 
-
-  <!-- =======================================================
-       JAVASCRIPT
-       ======================================================= -->
+  <footer>
+    TechDesk API Tester · Built for development and API validation
+  </footer>
 
   <script>
+    "use strict";
 
-    // =========================================================
-    // CONFIGURATION
-    // =========================================================
+    const DEFAULT_API_URL = "https://techdesk-production.up.railway.app";
+    const TOKEN_KEY = "techdesk_token";
 
-    const API_URL = "http://localhost:5000";
+    let API_URL = DEFAULT_API_URL;
+    let token = sessionStorage.getItem(TOKEN_KEY) || "";
 
-    const AUDIT_PATH = "/api/audit";
+    const output = document.getElementById("output");
 
-    let authToken =
-      sessionStorage.getItem("techdesk_token") || "";
-
-
-    // =========================================================
-    // GENERAL HELPERS
-    // =========================================================
-
-    function showJSON(elementId, data) {
-
-      const element =
-        document.getElementById(elementId);
-
-      if (!element) {
-        return;
-      }
-
-      element.textContent =
-        JSON.stringify(data, null, 2);
+    function normalizeBaseUrl(url) {
+      return url.trim().replace(/\/+$/, "");
     }
 
+    function displayOutput(title, data) {
+      const text = typeof data === "string"
+        ? data
+        : JSON.stringify(data, null, 2);
 
-    function getHeaders() {
+      output.textContent =
+        `[${new Date().toLocaleString()}] ${title}\n\n${text}`;
 
-      const headers = {
-        "Content-Type": "application/json"
-      };
-
-      if (authToken) {
-
-        headers["Authorization"] =
-          "Bearer " + authToken;
-
-      }
-
-      return headers;
+      document.getElementById("lastResponse").textContent = title;
     }
 
+    function setBackendStatus(isOnline, message) {
+      const status = document.getElementById("backendStatus");
+      const badge = document.getElementById("backendBadge");
 
-    function checkToken(
-      outputId = "loginOutput"
-    ) {
+      status.textContent = message;
+      badge.textContent = isOnline ? "Online" : "Offline";
+      badge.className = `badge ${isOnline ? "online" : "offline"}`;
+    }
 
-      if (!authToken) {
+    function updateAuthDisplay() {
+      const status = document.getElementById("authStatus");
+      const badge = document.getElementById("authBadge");
+      const display = document.getElementById("tokenDisplay");
 
-        showJSON(outputId, {
-          message:
-            "You are not authenticated. Please login first."
+      status.textContent = token ? "Token available" : "Not authenticated";
+      badge.textContent = token ? "JWT ready" : "JWT required";
+      badge.className = `badge ${token ? "online" : ""}`;
+
+      display.textContent = token || "No token stored.";
+    }
+
+    function saveToken(value) {
+      token = value || "";
+
+      if (token) {
+        sessionStorage.setItem(TOKEN_KEY, token);
+      } else {
+        sessionStorage.removeItem(TOKEN_KEY);
+      }
+
+      updateAuthDisplay();
+    }
+
+    function saveApiUrl() {
+      const input = document.getElementById("apiUrl");
+
+      try {
+        const parsed = new URL(input.value.trim());
+
+        if (!["https:", "http:"].includes(parsed.protocol)) {
+          throw new Error("Use an HTTP or HTTPS URL.");
+        }
+
+        API_URL = normalizeBaseUrl(parsed.href);
+        input.value = API_URL;
+
+        displayOutput("API URL updated", {
+          baseUrl: API_URL,
+          note: "The next request will use this URL."
         });
 
-        return false;
-      }
-
-      return true;
-    }
-
-
-    function escapeHTML(value) {
-
-      if (
-        value === null ||
-        value === undefined
-      ) {
-        return "";
-      }
-
-      return String(value)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-    }
-
-
-    function getStatusClass(status) {
-
-      const allowed =
-        [200, 201, 400, 401, 403, 404, 409, 500];
-
-      if (allowed.includes(status)) {
-
-        return "status-" + status;
-
-      }
-
-      return "status-other";
-    }
-
-
-    async function apiRequest(
-      outputId,
-      path,
-      options = {}
-    ) {
-
-      try {
-
-        const response =
-          await fetch(
-            API_URL + path,
-            {
-              ...options,
-
-              headers: {
-                ...getHeaders(),
-                ...(options.headers || {})
-              }
-            }
-          );
-
-
-        let data;
-
-
-        try {
-
-          data =
-            await response.json();
-
-        } catch {
-
-          data = {
-            message:
-              "Server returned a non-JSON response."
-          };
-
-        }
-
-
-        const result = {
-
-          status:
-            response.status,
-
-          data:
-            data
-
-        };
-
-
-        showJSON(
-          outputId,
-          result
-        );
-
-
-        return result;
-
-
+        checkBackendStatus();
       } catch (error) {
-
-        const result = {
-
-          status:
-            "NETWORK_ERROR",
-
-          data: {
-
-            message:
-              error.message
-
-          }
-
-        };
-
-
-        showJSON(
-          outputId,
-          result
-        );
-
-
-        return result;
-
+        displayOutput("Invalid API URL", error.message);
       }
-
     }
 
-
-    function clearFields() {
-
-      const fields = [
-
-        "createTitle",
-        "createDescription",
-        "createAssetId",
-
-        "updateAssignedTo",
-
-        "assignUserId",
-
-        "troubleshootingDescription",
-        "troubleshootingResult",
-
-        "registerFirstName",
-        "registerLastName",
-        "registerEmail",
-        "registerPassword",
-
-        "auditAction",
-        "auditDetails"
-
-      ];
-
-
-      fields.forEach(id => {
-
-        const element =
-          document.getElementById(id);
-
-        if (element) {
-
-          element.value = "";
-
-        }
-
-      });
-
+    function resetApiUrl() {
+      API_URL = DEFAULT_API_URL;
+      document.getElementById("apiUrl").value = DEFAULT_API_URL;
+      displayOutput("API URL reset", DEFAULT_API_URL);
+      checkBackendStatus();
     }
 
-
-    // =========================================================
-    // TOKEN MANAGEMENT
-    // =========================================================
-
-    function updateTokenDisplay() {
-
-      const tokenInput =
-        document.getElementById("tokenOutput");
-
-      const sessionStatus =
-        document.getElementById("sessionStatus");
-
-
-      if (
-        !tokenInput ||
-        !sessionStatus
-      ) {
-        return;
-      }
-
-
-      if (authToken) {
-
-        tokenInput.value =
-          authToken;
-
-
-        sessionStatus.innerHTML = `
-
-          <div class="logged-user">
-
-            Authentication token loaded
-            from this browser session.
-
-          </div>
-
-        `;
-
-      } else {
-
-        tokenInput.value = "";
-
-
-        sessionStatus.innerHTML = `
-
-          <div class="info">
-
-            No active authentication session.
-
-          </div>
-
-        `;
-
-      }
-
-    }
-
-
-    function toggleTokenVisibility() {
-
-      const tokenInput =
-        document.getElementById("tokenOutput");
-
-
-      if (!tokenInput) {
-        return;
-      }
-
-
-      if (
-        tokenInput.type === "password"
-      ) {
-
-        tokenInput.type = "text";
-
-      } else {
-
-        tokenInput.type = "password";
-
-      }
-
-    }
-
-
-    async function copyToken() {
-
-      if (!authToken) {
-
-        alert(
-          "There is no authentication token to copy."
-        );
-
-        return;
-      }
-
-
-      try {
-
-        await navigator.clipboard
-          .writeText(authToken);
-
-        alert(
-          "Authentication token copied."
-        );
-
-      } catch {
-
-        alert(
-          "Unable to copy token."
-        );
-
-      }
-
-    }
-
-
-    function clearToken() {
-
-      authToken = "";
-
-      sessionStorage.removeItem(
-        "techdesk_token"
-      );
-
-      updateTokenDisplay();
-
-
-      showJSON(
-        "loginOutput",
-        {
-          message:
-            "Authentication token cleared."
-        }
-      );
-
-    }
-
-
-    function logout() {
-
-      authToken = "";
-
-      sessionStorage.removeItem(
-        "techdesk_token"
-      );
-
-      updateTokenDisplay();
-
-
-      showJSON(
-        "loginOutput",
-        {
-          message:
-            "Logged out successfully."
-        }
-      );
-
-
-      showJSON(
-        "profileOutput",
-        {
-          message:
-            "No authentication token available."
-        }
-      );
-
-    }
-
-
-    // =========================================================
-    // LOGIN
-    // =========================================================
-
-    async function login() {
-
-      const email =
-        document
-          .getElementById("loginEmail")
-          .value
-          .trim();
-
-
-      const password =
-        document
-          .getElementById("loginPassword")
-          .value;
-
-
-      if (
-        !email ||
-        !password
-      ) {
-
-        showJSON(
-          "loginOutput",
-          {
-            message:
-              "Email and password are required."
-          }
-        );
-
-        return;
-
-      }
-
-
-      try {
-
-        const response =
-          await fetch(
-            API_URL +
-            "/api/auth/login",
-            {
-
-              method: "POST",
-
-              headers: {
-                "Content-Type":
-                  "application/json"
-              },
-
-              body:
-                JSON.stringify({
-                  email,
-                  password
-                })
-
-            }
-          );
-
-
-        let data;
-
-
-        try {
-
-          data =
-            await response.json();
-
-        } catch {
-
-          data = {
-            message:
-              "Server returned a non-JSON response."
-          };
-
-        }
-
-
-        if (
-          response.ok &&
-          data.token
-        ) {
-
-          authToken =
-            data.token;
-
-
-          sessionStorage.setItem(
-            "techdesk_token",
-            authToken
-          );
-
-
-          updateTokenDisplay();
-
-
-          showJSON(
-            "loginOutput",
-            {
-              status:
-                response.status,
-
-              message:
-                "Login successful!",
-
-              user:
-                data.user || null
-            }
-          );
-
-
-        } else {
-
-          showJSON(
-            "loginOutput",
-            {
-              status:
-                response.status,
-
-              data:
-                data
-            }
-          );
-
-        }
-
-
-      } catch (error) {
-
-        showJSON(
-          "loginOutput",
-          {
-            status:
-              "NETWORK_ERROR",
-
-            message:
-              error.message
-          }
-        );
-
-      }
-
-    }
-
-
-    // =========================================================
-    // AUTHENTICATION
-    // =========================================================
-
-    async function testAuth() {
-
-      if (
-        !checkToken("profileOutput")
-      ) {
-        return;
-      }
-
-
-      await apiRequest(
-        "profileOutput",
-
-        "/api/auth/me",
-
-        {
-          method: "GET"
-        }
-      );
-
-    }
-
-
-    // =========================================================
-    // TICKETS
-    // =========================================================
-
-    async function getTickets() {
-
-      if (
-        !checkToken("ticketOutput")
-      ) {
-        return;
-      }
-
-
-      await apiRequest(
-        "ticketOutput",
-
-        "/api/tickets",
-
-        {
-          method: "GET"
-        }
-      );
-
-    }
-
-
-    async function getTicket() {
-
-      if (
-        !checkToken("ticketOutput")
-      ) {
-        return;
-      }
-
-
-      await apiRequest(
-        "ticketOutput",
-
-        "/api/tickets/1",
-
-        {
-          method: "GET"
-        }
-      );
-
-    }
-
-
-    async function getTicketHistory() {
-
-      if (
-        !checkToken("ticketOutput")
-      ) {
-        return;
-      }
-
-
-      await apiRequest(
-        "ticketOutput",
-
-        "/api/history/ticket/1",
-
-        {
-          method: "GET"
-        }
-      );
-
-    }
-
-
-    async function createTicket() {
-
-      if (
-        !checkToken("createTicketOutput")
-      ) {
-        return;
-      }
-
-
-      const title =
-        document
-          .getElementById("createTitle")
-          .value
-          .trim();
-
-
-      const description =
-        document
-          .getElementById("createDescription")
-          .value
-          .trim();
-
-
-      const priority =
-        document
-          .getElementById("createPriority")
-          .value;
-
-
-      const status =
-        document
-          .getElementById("createStatus")
-          .value;
-
-
-      const category =
-        document
-          .getElementById("createCategory")
-          .value;
-
-
-      const assetIdValue =
-        document
-          .getElementById("createAssetId")
-          .value
-          .trim();
-
-
-      if (
-        !title ||
-        !description
-      ) {
-
-        showJSON(
-          "createTicketOutput",
-          {
-            message:
-              "Title and description are required."
-          }
-        );
-
-        return;
-      }
-
-
-      const body = {
-
-        title,
-        description,
-        priority,
-        status,
-        category
-
+    async function apiRequest(path, options = {}, settings = {}) {
+      const {
+        includeAuth = true,
+        showResult = true
+      } = settings;
+
+      const headers = {
+        Accept: "application/json",
+        ...(options.headers || {})
       };
 
-
-      if (assetIdValue) {
-
-        const assetId =
-          Number(assetIdValue);
-
-
-        if (
-          !Number.isInteger(assetId) ||
-          assetId < 1
-        ) {
-
-          showJSON(
-            "createTicketOutput",
-            {
-              message:
-                "Asset ID must be a positive integer."
-            }
-          );
-
-          return;
-
-        }
-
-
-        body.asset_id =
-          assetId;
-
+      if (options.body && !headers["Content-Type"]) {
+        headers["Content-Type"] = "application/json";
       }
 
-
-      await apiRequest(
-
-        "createTicketOutput",
-
-        "/api/tickets",
-
-        {
-          method: "POST",
-
-          body:
-            JSON.stringify(body)
-        }
-
-      );
-
-    }
-
-
-    async function updateTicket() {
-
-      if (
-        !checkToken("updateTicketOutput")
-      ) {
-        return;
+      if (includeAuth && token) {
+        headers.Authorization = `Bearer ${token}`;
       }
 
-
-      const priority =
-        document
-          .getElementById("updatePriority")
-          .value;
-
-
-      const status =
-        document
-          .getElementById("updateStatus")
-          .value;
-
-
-      const category =
-        document
-          .getElementById("updateCategory")
-          .value;
-
-
-      const assignedToValue =
-        document
-          .getElementById("updateAssignedTo")
-          .value
-          .trim();
-
-
-      const body = {};
-
-
-      if (priority) {
-        body.priority = priority;
-      }
-
-
-      if (status) {
-        body.status = status;
-      }
-
-
-      if (category) {
-        body.category = category;
-      }
-
-
-      if (assignedToValue) {
-
-        const assignedTo =
-          Number(assignedToValue);
-
-
-        if (
-          !Number.isInteger(assignedTo) ||
-          assignedTo < 1
-        ) {
-
-          showJSON(
-            "updateTicketOutput",
-            {
-              message:
-                "Assigned Technician ID must be a positive integer."
-            }
-          );
-
-          return;
-
-        }
-
-
-        body.assigned_to =
-          assignedTo;
-
-      }
-
-
-      if (
-        Object.keys(body).length === 0
-      ) {
-
-        showJSON(
-          "updateTicketOutput",
-          {
-            message:
-              "Select at least one field to update."
-          }
-        );
-
-        return;
-      }
-
-
-      await apiRequest(
-
-        "updateTicketOutput",
-
-        "/api/tickets/1",
-
-        {
-          method: "PUT",
-
-          body:
-            JSON.stringify(body)
-        }
-
-      );
-
-    }
-
-
-    async function assignTicket() {
-
-      if (
-        !checkToken("assignOutput")
-      ) {
-        return;
-      }
-
-
-      const assignedToValue =
-        document
-          .getElementById("assignUserId")
-          .value
-          .trim();
-
-
-      if (!assignedToValue) {
-
-        showJSON(
-          "assignOutput",
-          {
-            message:
-              "Technician/Admin User ID is required."
-          }
-        );
-
-        return;
-      }
-
-
-      const assignedTo =
-        Number(assignedToValue);
-
-
-      if (
-        !Number.isInteger(assignedTo) ||
-        assignedTo < 1
-      ) {
-
-        showJSON(
-          "assignOutput",
-          {
-            message:
-              "Technician/Admin User ID must be a positive integer."
-          }
-        );
-
-        return;
-      }
-
-
-      await apiRequest(
-
-        "assignOutput",
-
-        "/api/tickets/1/assign",
-
-        {
-          method: "PUT",
-
-          body:
-            JSON.stringify({
-              assigned_to:
-                assignedTo
-            })
-        }
-
-      );
-
-    }
-
-
-    // =========================================================
-    // SECURITY TESTS
-    // =========================================================
-
-    function setSecurityRunning(
-      testName
-    ) {
-
-      const resultBox =
-        document.getElementById(
-          "securityResult"
-        );
-
-
-      resultBox.className =
-        "test-result running";
-
-
-      resultBox.innerHTML = `
-
-        <div class="result-title running-text">
-
-          ⏳ Running Security Test
-
-        </div>
-
-        <p>
-
-          Test:
-          <strong>
-            ${escapeHTML(testName)}
-          </strong>
-
-        </p>
-
-        <p class="running-text">
-
-          Waiting for API response...
-
-        </p>
-
-      `;
-
-    }
-
-
-    function setSecurityInfo(
-      testName,
-      message
-    ) {
-
-      const resultBox =
-        document.getElementById(
-          "securityResult"
-        );
-
-
-      resultBox.className =
-        "test-result info-result";
-
-
-      resultBox.innerHTML = `
-
-        <div class="result-title info-text">
-
-          ℹ️ TEST REQUIRES DIFFERENT SESSION
-
-        </div>
-
-        <p>
-
-          <strong>Test:</strong>
-
-          ${escapeHTML(testName)}
-
-        </p>
-
-        <p>
-
-          ${escapeHTML(message)}
-
-        </p>
-
-      `;
-
-    }
-
-
-    function setSecurityResult(
-      testName,
-      expectedStatus,
-      actualStatus,
-      message,
-      passed
-    ) {
-
-      const resultBox =
-        document.getElementById(
-          "securityResult"
-        );
-
-
-      resultBox.className =
-        passed
-          ? "test-result pass"
-          : "test-result fail";
-
-
-      const statusClass =
-        getStatusClass(
-          actualStatus
-        );
-
-
-      resultBox.innerHTML = `
-
-        <div class="result-title ${
-          passed
-            ? "pass-text"
-            : "fail-text"
-        }">
-
-          ${
-            passed
-              ? "✅ TEST PASSED"
-              : "❌ TEST FAILED"
-          }
-
-        </div>
-
-
-        <p>
-
-          <strong>Test:</strong>
-
-          ${escapeHTML(testName)}
-
-        </p>
-
-
-        <p>
-
-          <strong>
-            Expected HTTP Status:
-          </strong>
-
-          <span class="status-box status-other">
-
-            ${expectedStatus}
-
-          </span>
-
-        </p>
-
-
-        <p>
-
-          <strong>
-            Actual HTTP Status:
-          </strong>
-
-          <span class="status-box ${statusClass}">
-
-            ${actualStatus}
-
-          </span>
-
-        </p>
-
-
-        <p>
-
-          <strong>
-            Server Message:
-          </strong>
-
-          ${escapeHTML(message)}
-
-        </p>
-
-
-        <p class="${
-          passed
-            ? "pass-text"
-            : "fail-text"
-        }">
-
-          ${
-            passed
-              ? "The backend correctly enforced this security rule."
-              : "The backend response did not match the expected security behavior."
-          }
-
-        </p>
-
-      `;
-
-    }
-
-
-    async function runSecurityRequest(
-      testName,
-      body,
-      expectedStatus
-    ) {
-
-      if (
-        !checkToken("securityOutput")
-      ) {
-        return;
-      }
-
-
-      setSecurityRunning(
-        testName
-      );
-
-
-      const result =
-        await apiRequest(
-
-          "securityOutput",
-
-          "/api/tickets/1",
-
-          {
-            method: "PUT",
-
-            body:
-              JSON.stringify(body)
-          }
-
-        );
-
-
-      const actualStatus =
-        result.status;
-
-
-      let message =
-        "No message returned.";
-
-
-      if (
-        result.data &&
-        typeof result.data === "object"
-      ) {
-
-        message =
-          result.data.message ||
-          "No message returned.";
-
-      }
-
-
-      const passed =
-        actualStatus ===
-        expectedStatus;
-
-
-      setSecurityResult(
-
-        testName,
-
-        expectedStatus,
-
-        actualStatus,
-
-        message,
-
-        passed
-
-      );
-
-    }
-
-
-    async function testInvalidStatus() {
-
-      await runSecurityRequest(
-
-        "Invalid Status",
-
-        {
-          status: "banana"
-        },
-
-        400
-
-      );
-
-    }
-
-
-    async function testInvalidPriority() {
-
-      await runSecurityRequest(
-
-        "Invalid Priority",
-
-        {
-          priority: "banana"
-        },
-
-        400
-
-      );
-
-    }
-
-
-    async function testInvalidCategory() {
-
-      await runSecurityRequest(
-
-        "Invalid Category",
-
-        {
-          category: "banana"
-        },
-
-        400
-
-      );
-
-    }
-
-
-    async function testEmployeePermissions() {
-
-      if (
-        !checkToken("securityOutput")
-      ) {
-        return;
-      }
-
+      const requestOptions = {
+        ...options,
+        headers
+      };
 
       try {
-
-        const response =
-          await fetch(
-            API_URL +
-            "/api/auth/me",
-            {
-              method: "GET",
-              headers: getHeaders()
-            }
-          );
-
-
-        const data =
-          await response.json();
-
-
-        const role =
-          data?.user?.role;
-
-
-        if (
-          role === "admin" ||
-          role === "technician"
-        ) {
-
-          setSecurityInfo(
-
-            "Employee Permission Test",
-
-            "You are currently logged in as " +
-            role +
-            ". An employee permission test must be executed using an employee JWT. " +
-            "The test was not sent because doing so with an admin/technician token would incorrectly produce HTTP 200."
-
-          );
-
-
-          showJSON(
-            "securityOutput",
-            {
-              status:
-                response.status,
-
-              message:
-                "Employee Permission Test not executed.",
-
-              current_role:
-                role,
-
-              expected_role:
-                "employee",
-
-              expected_status:
-                403
-            }
-          );
-
-
-          return;
-
-        }
-
-
-        if (
-          role === "employee"
-        ) {
-
-          await runSecurityRequest(
-
-            "Employee Permission Test",
-
-            {
-              status: "pending"
-            },
-
-            403
-
-          );
-
-
-          return;
-
-        }
-
-
-        setSecurityInfo(
-
-          "Employee Permission Test",
-
-          "Unable to determine the current user's role."
-
-        );
-
-
-      } catch (error) {
-
-        showJSON(
-          "securityOutput",
-          {
-            status:
-              "NETWORK_ERROR",
-
-            message:
-              error.message
-          }
-        );
-
-      }
-
-    }
-
-
-    // =========================================================
-    // TROUBLESHOOTING
-    // =========================================================
-
-    async function getTroubleshooting() {
-
-      if (
-        !checkToken(
-          "troubleshootingOutput"
-        )
-      ) {
-        return;
-      }
-
-
-      const ticketIdValue =
-        document
-          .getElementById(
-            "troubleshootingTicketId"
-          )
-          .value
-          .trim();
-
-
-      const ticketId =
-        Number(ticketIdValue || 1);
-
-
-      if (
-        !Number.isInteger(ticketId) ||
-        ticketId < 1
-      ) {
-
-        showJSON(
-          "troubleshootingOutput",
-          {
-            message:
-              "Ticket ID must be a positive integer."
-          }
-        );
-
-        return;
-      }
-
-
-      await apiRequest(
-
-        "troubleshootingOutput",
-
-        "/api/troubleshooting/ticket/" +
-        ticketId,
-
-        {
-          method: "GET"
-        }
-
-      );
-
-    }
-
-
-    async function addTroubleshooting() {
-
-      if (
-        !checkToken(
-          "troubleshootingOutput"
-        )
-      ) {
-        return;
-      }
-
-
-      const ticketId =
-        Number(
-          document
-            .getElementById(
-              "troubleshootingTicketId"
-            )
-            .value
-        );
-
-
-      const description =
-        document
-          .getElementById(
-            "troubleshootingDescription"
-          )
-          .value
-          .trim();
-
-
-      const result =
-        document
-          .getElementById(
-            "troubleshootingResult"
-          )
-          .value
-          .trim();
-
-
-      const completed =
-        document
-          .getElementById(
-            "troubleshootingCompleted"
-          )
-          .value === "true";
-
-
-      if (
-        !Number.isInteger(ticketId) ||
-        ticketId < 1
-      ) {
-
-        showJSON(
-          "troubleshootingOutput",
-          {
-            message:
-              "Ticket ID must be a positive integer."
-          }
-        );
-
-        return;
-
-      }
-
-
-      if (!description) {
-
-        showJSON(
-          "troubleshootingOutput",
-          {
-            message:
-              "Troubleshooting description is required."
-          }
-        );
-
-        return;
-
-      }
-
-
-      await apiRequest(
-
-        "troubleshootingOutput",
-
-        "/api/troubleshooting",
-
-        {
-          method: "POST",
-
-          body:
-            JSON.stringify({
-
-              ticket_id:
-                ticketId,
-
-              description:
-                description,
-
-              result:
-                result || null,
-
-              completed:
-                completed
-
-            })
-
-        }
-
-      );
-
-    }
-
-
-    // =========================================================
-    // REGISTRATION
-    // =========================================================
-
-    async function registerUser() {
-
-      const firstName =
-        document
-          .getElementById(
-            "registerFirstName"
-          )
-          .value
-          .trim();
-
-
-      const lastName =
-        document
-          .getElementById(
-            "registerLastName"
-          )
-          .value
-          .trim();
-
-
-      const email =
-        document
-          .getElementById(
-            "registerEmail"
-          )
-          .value
-          .trim();
-
-
-      const password =
-        document
-          .getElementById(
-            "registerPassword"
-          )
-          .value;
-
-
-      if (
-        !firstName ||
-        !lastName ||
-        !email ||
-        !password
-      ) {
-
-        showJSON(
-          "registerOutput",
-          {
-            message:
-              "All registration fields are required."
-          }
-        );
-
-        return;
-      }
-
-
-      if (
-        password.length < 8
-      ) {
-
-        showJSON(
-          "registerOutput",
-          {
-            message:
-              "Password must be at least 8 characters long."
-          }
-        );
-
-        return;
-
-      }
-
-
-      try {
-
-        const response =
-          await fetch(
-
-            API_URL +
-            "/api/auth/register",
-
-            {
-              method: "POST",
-
-              headers: {
-                "Content-Type":
-                  "application/json"
-              },
-
-              body:
-                JSON.stringify({
-
-                  first_name:
-                    firstName,
-
-                  last_name:
-                    lastName,
-
-                  email,
-
-                  password
-
-                })
-
-            }
-
-          );
-
+        const response = await fetch(`${API_URL}${path}`, requestOptions);
+        const responseText = await response.text();
 
         let data;
 
-
         try {
-
-          data =
-            await response.json();
-
+          data = responseText ? JSON.parse(responseText) : null;
         } catch {
-
-          data = {
-            message:
-              "Server returned a non-JSON response."
-          };
-
+          data = responseText;
         }
 
+        const result = {
+          ok: response.ok,
+          status: response.status,
+          statusText: response.statusText,
+          url: `${API_URL}${path}`,
+          data
+        };
 
-        showJSON(
+        if (showResult) {
+          displayOutput(
+            `${requestOptions.method || "GET"} ${path} → ${response.status}`,
+            result
+          );
+        }
 
-          "registerOutput",
-
-          {
-            status:
-              response.status,
-
-            data:
-              data
-
-          }
-
-        );
-
-
+        return result;
       } catch (error) {
+        const result = {
+          ok: false,
+          error: error.message,
+          message:
+            "Request failed. Check the backend URL, Railway deployment, network, and CORS configuration.",
+          url: `${API_URL}${path}`
+        };
 
-        showJSON(
+        if (showResult) {
+          displayOutput("NETWORK_ERROR", result);
+        }
 
-          "registerOutput",
-
-          {
-            status:
-              "NETWORK_ERROR",
-
-            message:
-              error.message
-          }
-
-        );
-
+        return result;
       }
-
     }
 
+    async function checkBackendStatus() {
+      setBackendStatus(false, "Checking...");
+      const button = document.getElementById("checkBackendBtn");
+      button.disabled = true;
 
-    // =========================================================
-    // AUDIT LOGS
-    // =========================================================
+      try {
+        const result = await apiRequest("/", {}, { includeAuth: false, showResult: false });
+
+        if (result.ok) {
+          setBackendStatus(true, "Online");
+          displayOutput("Backend connection successful", result);
+        } else {
+          setBackendStatus(false, `HTTP ${result.status}`);
+          displayOutput("Backend health check failed", result);
+        }
+      } finally {
+        button.disabled = false;
+      }
+    }
+
+    // Authentication
+
+    document.getElementById("loginForm").addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const email = document.getElementById("loginEmail").value.trim();
+      const password = document.getElementById("loginPassword").value;
+
+      const result = await apiRequest(
+        "/api/auth/login",
+        {
+          method: "POST",
+          body: JSON.stringify({ email, password })
+        },
+        { includeAuth: false }
+      );
+
+      if (result.ok && result.data && typeof result.data === "object") {
+        const newToken =
+          result.data.token ||
+          result.data.accessToken ||
+          result.data.access_token;
+
+        if (newToken) {
+          saveToken(newToken);
+          displayOutput("Login successful", {
+            status: result.status,
+            message: "JWT token saved in session storage.",
+            data: result.data
+          });
+        } else {
+          displayOutput("Login response received", {
+            warning: "No recognized token field was found in the response.",
+            expectedFields: ["token", "accessToken", "access_token"],
+            data: result.data
+          });
+        }
+      }
+    });
+
+    async function getCurrentUser() {
+      if (!token) {
+        displayOutput("Authentication required", "Log in first to retrieve the current user.");
+        return;
+      }
+
+      await apiRequest("/api/auth/me");
+    }
+
+    async function logout() {
+      saveToken("");
+      displayOutput("Logged out", "The JWT token has been removed from session storage.");
+    }
+
+    async function copyToken() {
+      if (!token) {
+        displayOutput("No token", "Log in first to generate a JWT token.");
+        return;
+      }
+
+      try {
+        await navigator.clipboard.writeText(token);
+        displayOutput("Token copied", "JWT copied to clipboard.");
+      } catch {
+        displayOutput("Clipboard unavailable", "Select and copy the token shown on the page.");
+      }
+    }
+
+    function clearToken() {
+      saveToken("");
+      displayOutput("Token cleared", "JWT removed from session storage.");
+    }
+
+    // Tickets
+
+    async function getTickets() {
+      await apiRequest("/api/tickets");
+    }
+
+    async function getTicketById() {
+      const id = getTicketId();
+      if (!id) return;
+
+      await apiRequest(`/api/tickets/${id}`);
+    }
+
+    function getTicketId() {
+      const value = Number(document.getElementById("ticketId").value);
+
+      if (!Number.isInteger(value) || value < 1) {
+        displayOutput("Invalid ticket ID", "Enter a positive integer.");
+        return null;
+      }
+
+      return value;
+    }
+
+    document.getElementById("createTicketForm").addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const payload = {
+        title: document.getElementById("ticketTitle").value.trim(),
+        description: document.getElementById("ticketDescription").value.trim(),
+        category: document.getElementById("ticketCategory").value,
+        priority: document.getElementById("ticketPriority").value,
+        status: document.getElementById("ticketStatus").value
+      };
+
+      if (!payload.title || !payload.description) {
+        displayOutput("Validation error", "Title and description are required.");
+        return;
+      }
+
+      await apiRequest("/api/tickets", {
+        method: "POST",
+        body: JSON.stringify(payload)
+      });
+    });
+
+    async function updateTicket() {
+      const id = getTicketId();
+      if (!id) return;
+
+      const payload = {
+        status: document.getElementById("updateStatus").value,
+        priority: document.getElementById("updatePriority").value
+      };
+
+      await apiRequest(`/api/tickets/${id}`, {
+        method: "PUT",
+        body: JSON.stringify(payload)
+      });
+    }
+
+    async function assignTicket() {
+      const id = getTicketId();
+      if (!id) return;
+
+      const assigneeId = Number(document.getElementById("assigneeId").value);
+
+      if (!Number.isInteger(assigneeId) || assigneeId < 1) {
+        displayOutput("Invalid assignee ID", "Enter a positive user ID.");
+        return;
+      }
+
+      await apiRequest(`/api/tickets/${id}/assign`, {
+        method: "PATCH",
+        body: JSON.stringify({ assigned_to: assigneeId })
+      });
+    }
+
+    async function getTicketHistory() {
+      const id = getTicketId();
+      if (!id) return;
+
+      await apiRequest(`/api/history/ticket/${id}`);
+    }
+
+    // Security and validation tests
+
+    async function testUnauthorized() {
+      const id = getTicketId() || 1;
+
+      const result = await apiRequest(
+        `/api/tickets/${id}`,
+        {},
+        { includeAuth: false }
+      );
+
+      displayOutput("Unauthenticated access test", {
+        interpretation:
+          result.status === 401 || result.status === 403
+            ? "PASS: the API rejected the unauthenticated request."
+            : "Review the response. The endpoint may allow unauthenticated access or require different permissions.",
+        result
+      });
+    }
+
+    async function runValidationTest(field, invalidValue) {
+      const payload = {
+        title: "Validation test",
+        description: "Testing server-side input validation.",
+        category: "hardware",
+        priority: "medium",
+        status: "open"
+      };
+
+      payload[field] = invalidValue;
+
+      const result = await apiRequest("/api/tickets", {
+        method: "POST",
+        body: JSON.stringify(payload)
+      });
+
+      displayOutput(`Validation test: ${field}`, {
+        interpretation:
+          result.status >= 400 && result.status < 500
+            ? "The server rejected the request. Review the response to confirm why."
+            : "Review the response to determine whether validation worked as expected.",
+        result
+      });
+    }
+
+    async function testInvalidStatus() {
+      await runValidationTest("status", "not_a_real_status");
+    }
+
+    async function testInvalidPriority() {
+      await runValidationTest("priority", "extreme_super_priority");
+    }
+
+    async function testInvalidCategory() {
+      await runValidationTest("category", "invalid_category");
+    }
+
+    // Troubleshooting
+
+    async function getTroubleshooting() {
+      await apiRequest("/api/troubleshooting");
+    }
+
+    document.getElementById("troubleshootingForm").addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const payload = {
+        title: document.getElementById("guideTitle").value.trim(),
+        category: document.getElementById("guideCategory").value,
+        content: document.getElementById("guideContent").value.trim()
+      };
+
+      await apiRequest("/api/troubleshooting", {
+        method: "POST",
+        body: JSON.stringify(payload)
+      });
+    });
+
+    // Audit logs
 
     async function getAuditLogs() {
-
-      if (
-        !checkToken("auditOutput")
-      ) {
-        return;
-      }
-
-
-      await apiRequest(
-
-        "auditOutput",
-
-        AUDIT_PATH,
-
-        {
-          method: "GET"
-        }
-
-      );
-
+      await apiRequest("/api/audit");
     }
 
+    async function getAuditLogById() {
+      const id = getTicketId();
+      if (!id) return;
 
-    async function getAuditLog() {
-
-      if (
-        !checkToken("auditOutput")
-      ) {
-        return;
-      }
-
-
-      await apiRequest(
-
-        "auditOutput",
-
-        AUDIT_PATH + "/1",
-
-        {
-          method: "GET"
-        }
-
-      );
-
+      await apiRequest(`/api/audit/${id}`);
     }
-
 
     async function createAuditLog() {
-
-      if (
-        !checkToken("auditOutput")
-      ) {
-        return;
-      }
-
-
-      const action =
-        document
-          .getElementById(
-            "auditAction"
-          )
-          .value
-          .trim();
-
-
-      const entityType =
-        document
-          .getElementById(
-            "auditEntityType"
-          )
-          .value
-          .trim();
-
-
-      const entityIdValue =
-        document
-          .getElementById(
-            "auditEntityId"
-          )
-          .value
-          .trim();
-
-
-      const details =
-        document
-          .getElementById(
-            "auditDetails"
-          )
-          .value
-          .trim();
-
-
-      if (
-        !action ||
-        !entityType ||
-        !entityIdValue ||
-        !details
-      ) {
-
-        showJSON(
-
-          "auditOutput",
-
-          {
-            message:
-              "All audit fields are required."
-          }
-
-        );
-
-        return;
-
-      }
-
-
-      const entityId =
-        Number(entityIdValue);
-
-
-      if (
-        !Number.isInteger(entityId) ||
-        entityId < 1
-      ) {
-
-        showJSON(
-
-          "auditOutput",
-
-          {
-            message:
-              "Entity ID must be a positive integer."
-          }
-
-        );
-
-        return;
-
-      }
-
-
-      await apiRequest(
-
-        "auditOutput",
-
-        AUDIT_PATH,
-
-        {
-
-          method: "POST",
-
-          body:
-            JSON.stringify({
-
-              action,
-
-              entity_type:
-                entityType,
-
-              entity_id:
-                entityId,
-
-              details
-
-            })
-
+      const payload = {
+        action: "TEST_EVENT",
+        entity_type: "ticket",
+        entity_id: getTicketId() || 1,
+        details: {
+          source: "TechDesk API Tester",
+          purpose: "Testing audit endpoint"
         }
+      };
 
-      );
-
+      await apiRequest("/api/audit", {
+        method: "POST",
+        body: JSON.stringify(payload)
+      });
     }
 
+    // Registration
 
-    // =========================================================
-    // INITIALIZATION
-    // =========================================================
+    document.getElementById("registerForm").addEventListener("submit", async (event) => {
+      event.preventDefault();
 
-    updateTokenDisplay();
+      const payload = {
+        name: document.getElementById("registerName").value.trim(),
+        email: document.getElementById("registerEmail").value.trim(),
+        password: document.getElementById("registerPassword").value,
+        role: document.getElementById("registerRole").value
+      };
 
+      await apiRequest(
+        "/api/auth/register",
+        {
+          method: "POST",
+          body: JSON.stringify(payload)
+        },
+        { includeAuth: false }
+      );
+    });
+
+    // Response console
+
+    async function copyOutput() {
+      try {
+        await navigator.clipboard.writeText(output.textContent);
+        displayOutput("Console copied", "The latest response console text was copied.");
+      } catch {
+        displayOutput("Clipboard unavailable", "Select and copy the response manually.");
+      }
+    }
+
+    function clearOutput() {
+      output.textContent = "Console cleared. Run another API request to see its response.";
+      document.getElementById("lastResponse").textContent = "No requests yet";
+    }
+
+    // Initialize the tester
+
+    document.getElementById("apiUrl").value = DEFAULT_API_URL;
+    updateAuthDisplay();
+    checkBackendStatus();
   </script>
-
 </body>
 </html>
